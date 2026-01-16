@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Fleet - SkyWings</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <i class="fas fa-plane"></i>
+                    <span class="logo-text">SkyWings</span>
+                </a>
+            </div>
+
+
+            <!-- Navigation Menu -->
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            Flights <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="booking.html" class="dropdown-link">Book Flight</a></li>
+                            <li><a href="#" class="dropdown-link">Flight Status</a></li>
+                            <li><a href="#" class="dropdown-link">Flight Schedule</a></li>
+                            <li><a href="#" class="dropdown-link">Check-in</a></li>
+                            <li><a href="#" class="dropdown-link">Manage Booking</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            Services <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="cargo.html" class="dropdown-link">Cargo Services</a></li>
+                            <li><a href="charters.html" class="dropdown-link">Private Charters</a></li>
+                            <li><a href="training.html" class="dropdown-link">Flight Training</a></li>
+                            <li><a href="maintenance.html" class="dropdown-link">Aircraft Maintenance</a></li>
+                            <li><a href="airport-services.html" class="dropdown-link">Airport Services</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="fleet.html" class="nav-link active">Fleet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="destinations.html" class="nav-link">Destinations</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            More <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="travel-info.html" class="dropdown-link">Travel Info</a></li>
+                            <li><a href="baggage.html" class="dropdown-link">Baggage</a></li>
+                            <li><a href="lounge.html" class="dropdown-link">Lounge Access</a></li>
+                            <li><a href="insurance.html" class="dropdown-link">Travel Insurance</a></li>
+                            <li><a href="contact.html" class="dropdown-link">Contact</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Right Side Icons -->
+            <div class="nav-actions">
+                <div class="notification-center" id="notificationCenter">
+                    <a href="javascript:void(0)" class="nav-action-link" id="notificationToggle"
+                        aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="action-badge" id="notifBadge">3</span>
+                    </a>
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="notif-header">
+                            <h3>Notifications</h3>
+                            <button class="mark-all-btn" onclick="markAllRead()">Mark all as read</button>
+                        </div>
+                        <div class="notif-list" id="notifList">
+                            <!-- JS will populate this -->
+                        </div>
+                        <div class="notif-footer">
+                            <a href="#">View all updates</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="nav-action-link" aria-label="My Trips">
+                    <i class="fas fa-suitcase"></i>
+                </a>
+                <button class="btn-sign-in" onclick="openSignInModal()">Sign In</button>
+                <button class="btn-sign-up" onclick="openSignUpModal()">Sign Up</button>
+                <div class="user-menu" id="userMenu">
+                    <a href="javascript:void(0)" class="nav-action-link" aria-label="User Account">
+                        <i class="fas fa-user-circle"></i>
+                    </a>
+                    <div class="user-dropdown">
+                        <a href="profile.html" class="user-dropdown-link">My Profile</a>
+                        <a href="bookings.html" class="user-dropdown-link">My Bookings</a>
+                        <a href="mileage.html" class="user-dropdown-link">Mileage Program</a>
+                        <a href="#" class="user-dropdown-link" onclick="signOut()">Sign Out</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="fleet-page">
+        <section class="fleet-hero">
+            <video autoplay muted loop playsinline class="hero-video">
+                <source src="fleet-video.mp4" type="video/mp4">
+            </video>
+            <div class="hero-container">
+                <h1 class="hero-title">Experience Our Fleet</h1>
+                <p class="hero-subtitle">World-class aircraft designed for your comfort and safety. Discover the
+                    engineering excellence of SkyWings.</p>
+            </div>
+        </section>
+
+        <section class="fleet-list">
+            <div class="section-container">
+                <!-- Boeing 787 -->
+                <div class="fleet-item">
+                    <div class="fleet-image">
+                        <img src="https://th.bing.com/th?id=OIF.uLCbmZM%2b5Qz%2bq%2bOBRyU5cA&rs=1&pid=ImgDetMain&o=7&rm=3"
+                            alt="Boeing 787 Dreamliner">
+                    </div>
+                    <div class="fleet-info">
+                        <span class="fleet-tag">Flagship</span>
+                        <h2 class="fleet-name">Boeing 787 Dreamliner</h2>
+                        <p class="fleet-desc">
+                            The Boeing 787 Dreamliner redefined the travel experience with its innovative design and
+                            superior fuel efficiency. Featuring larger windows, cleaner air, and a lower cabin altitude,
+                            it ensures you arrive at your destination feeling refreshed.
+                        </p>
+                        <div class="fleet-stats">
+                            <div class="stat">
+                                <span class="stat-num">290</span>
+                                <span class="stat-text">Passengers</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-num">14,140km</span>
+                                <span class="stat-text">Range</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-num">Mach 0.85</span>
+                                <span class="stat-text">Speed</span>
+                            </div>
+                        </div>
+                        <ul class="fleet-features">
+                            <li><i class="fas fa-check-circle"></i> Adaptive LED lighting</li>
+                            <li><i class="fas fa-check-circle"></i> Improved cabin humidity</li>
+                            <li><i class="fas fa-check-circle"></i> Advanced turbulence damping</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Airbus A350 -->
+                <div class="fleet-item">
+                    <div class="fleet-image">
+                        <img src="https://static0.simpleflyingimages.com/wordpress/wp-content/uploads/2025/07/qatar_airways_airbus_a350-1000_-a7-ana.jpg?q=49&fit=crop&w=825&dpr=2"
+                            alt="Airbus A350-1000">
+                    </div>
+                    <div class="fleet-info">
+                        <span class="fleet-tag">Modern Luxury</span>
+                        <h2 class="fleet-name">Airbus A350-1000</h2>
+                        <p class="fleet-desc">
+                            Step into the future of long-haul travel with the Airbus A350. Designed with a wide-body
+                            cabin and state-of-the-art quiet engine technology, it offers an exceptionally quiet and
+                            spacious environment for our premium transcontinental routes.
+                        </p>
+                        <div class="fleet-stats">
+                            <div class="stat">
+                                <span class="stat-num">350</span>
+                                <span class="stat-text">Passengers</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-num">16,100km</span>
+                                <span class="stat-text">Range</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-num">Mach 0.89</span>
+                                <span class="stat-text">Speed</span>
+                            </div>
+                        </div>
+                        <ul class="fleet-features">
+                            <li><i class="fas fa-check-circle"></i> Ultra-quiet cabin</li>
+                            <li><i class="fas fa-check-circle"></i> Largest overhead bins</li>
+                            <li><i class="fas fa-check-circle"></i> Full-flat bed business class</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Private Jet Service -->
+                <div class="fleet-item">
+                    <div class="fleet-image">
+                        <img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&q=80&w=2070"
+                            alt="Private Jet Fleet">
+                    </div>
+                    <div class="fleet-info">
+                        <span class="fleet-tag">Elite</span>
+                        <h2 class="fleet-name">Private Charter Fleet</h2>
+                        <p class="fleet-desc">
+                            For those who value time and privacy above all else, our private charter fleet provides
+                            unparalleled flexibility. From light jets to ultra-long-range business aircraft, we ensure a
+                            seamless door-to-door luxury experience tailored to your schedule.
+                        </p>
+                        <div class="fleet-stats">
+                            <div class="stat">
+                                <span class="stat-num">8-19</span>
+                                <span class="stat-text">Passengers</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-num">Flexible</span>
+                                <span class="stat-text">Range</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-num">24/7</span>
+                                <span class="stat-text">Availability</span>
+                            </div>
+                        </div>
+                        <ul class="fleet-features">
+                            <li><i class="fas fa-check-circle"></i> Private terminals (FBO)</li>
+                            <li><i class="fas fa-check-circle"></i> Concierge service</li>
+                            <li><i class="fas fa-check-circle"></i> Custom in-flight catering</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Airbus A380 -->
+                <div class="fleet-item">
+                    <div class="fleet-image">
+                        <img src="https://th.bing.com/th/id/R.b9e5135cace5ae0afcc8dbaa547cbe6d?rik=3XqKcgHBq0mvXw&pid=ImgRaw&r=0"
+                            alt="Airbus A380">
+                    </div>
+                    <div class="fleet-info">
+                        <span class="fleet-tag">Giant of the Skies</span>
+                        <h2 class="fleet-name">Airbus A380-800</h2>
+                        <p class="fleet-desc">
+                            Experience the ultimate in luxury travel aboard the world's largest passenger aircraft. With
+                            two full decks of space, our A380 features private suites, a beautiful onboard lounge, and
+                            the quietest cabin in the sky.
+                        </p>
+                        <div class="fleet-stats">
+                            <div class="stat">
+                                <span class="stat-num">489</span>
+                                <span class="stat-text">Passengers</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-num">15,200km</span>
+                                <span class="stat-text">Range</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-num">Mach 0.85</span>
+                                <span class="stat-text">Speed</span>
+                            </div>
+                        </div>
+                        <ul class="fleet-features">
+                            <li><i class="fas fa-check-circle"></i> Onboard shower suites</li>
+                            <li><i class="fas fa-check-circle"></i> Premium social lounge</li>
+                            <li><i class="fas fa-check-circle"></i> Ultra-spacious double deck</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Boeing 777-300ER -->
+                <div class="fleet-item">
+                    <div class="fleet-image">
+                        <img src="https://images.unsplash.com/photo-1520437358207-323b43b50729?auto=format&fit=crop&q=80&w=2070"
+                            alt="Boeing 777">
+                    </div>
+                    <div class="fleet-info">
+                        <span class="fleet-tag">Long-Haul Hero</span>
+                        <h2 class="fleet-name">Boeing 777-300ER</h2>
+                        <p class="fleet-desc">
+                            Known as the backbone of our long-haul fleet, the "Triple Seven" offers unmatched
+                            reliability and comfort. Its wide-body design provides ample space for our award-winning
+                            SkySuite business class and comfortable economy seating.
+                        </p>
+                        <div class="fleet-stats">
+                            <div class="stat">
+                                <span class="stat-num">360</span>
+                                <span class="stat-text">Passengers</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-num">13,650km</span>
+                                <span class="stat-text">Range</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-num">Mach 0.84</span>
+                                <span class="stat-text">Speed</span>
+                            </div>
+                        </div>
+                        <ul class="fleet-features">
+                            <li><i class="fas fa-check-circle"></i> Industry-leading reliability</li>
+                            <li><i class="fas fa-check-circle"></i> High-definition IFE</li>
+                            <li><i class="fas fa-check-circle"></i> Ergonomic seating design</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Boeing 737 MAX 8 -->
+                <div class="fleet-item">
+                    <div class="fleet-image">
+                        <img src="https://images.unsplash.com/photo-1542296332-2e4473faf563?auto=format&fit=crop&q=80&w=2070"
+                            alt="Boeing 737 MAX">
+                    </div>
+                    <div class="fleet-info">
+                        <span class="fleet-tag">Short-Haul Specialist</span>
+                        <h2 class="fleet-name">Boeing 737 MAX 8</h2>
+                        <p class="fleet-desc">
+                            The 737 MAX 8 brings next-generation technology to our regional network. Featuring the
+                            Boeing Sky Interior with modern sculpted sidewalls and LED lighting, it offers a refreshed
+                            feel for shorter journeys.
+                        </p>
+                        <div class="fleet-stats">
+                            <div class="stat">
+                                <span class="stat-num">178</span>
+                                <span class="stat-text">Passengers</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-num">6,570km</span>
+                                <span class="stat-text">Range</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-num">Mach 0.79</span>
+                                <span class="stat-text">Speed</span>
+                            </div>
+                        </div>
+                        <ul class="fleet-features">
+                            <li><i class="fas fa-check-circle"></i> Boeing Sky Interior</li>
+                            <li><i class="fas fa-check-circle"></i> Quieter engine technology</li>
+                            <li><i class="fas fa-check-circle"></i> Split Scimitars winglets</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Airbus A321neo -->
+                <div class="fleet-item">
+                    <div class="fleet-image">
+                        <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&q=80&w=2070"
+                            alt="Airbus A321neo">
+                    </div>
+                    <div class="fleet-info">
+                        <span class="fleet-tag">Eco-Efficiency</span>
+                        <h2 class="fleet-name">Airbus A321neo</h2>
+                        <p class="fleet-desc">
+                            The A321neo is the largest member of our single-aisle fleet, offering the widest seats in
+                            its class. With advanced Sharklets and new engine options, it significantly reduces noise
+                            and CO2 emissions while maximizing passenger comfort.
+                        </p>
+                        <div class="fleet-stats">
+                            <div class="stat">
+                                <span class="stat-num">220</span>
+                                <span class="stat-text">Passengers</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-num">7,400km</span>
+                                <span class="stat-text">Range</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-num">Mach 0.82</span>
+                                <span class="stat-text">Speed</span>
+                            </div>
+                        </div>
+                        <ul class="fleet-features">
+                            <li><i class="fas fa-check-circle"></i> Airspace cabin design</li>
+                            <li><i class="fas fa-check-circle"></i> Extra-large overhead bins</li>
+                            <li><i class="fas fa-check-circle"></i> HEPA air filtration</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Bombardier Global 7500 -->
+                <div class="fleet-item">
+                    <div class="fleet-image">
+                        <img src="https://th.bing.com/th/id/R.b9e5135cace5ae0afcc8dbaa547cbe6d?rik=3XqKcgHBq0mvXw&pid=ImgRaw&r=0"
+                            alt="Bombardier Global 7500">
+                    </div>
+                    <div class="fleet-info">
+                        <span class="fleet-tag">Pinnacle of Private Flight</span>
+                        <h2 class="fleet-name">Bombardier Global 7500</h2>
+                        <p class="fleet-desc">
+                            Redefining the business jet experience, the Global 7500 is our most exclusive aircraft. With
+                            four true living spaces, a full-size kitchen, and a dedicated crew suite, it offers a
+                            non-stop range that connects the world's most distant cities.
+                        </p>
+                        <div class="fleet-stats">
+                            <div class="stat">
+                                <span class="stat-num">19</span>
+                                <span class="stat-text">Passengers</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-num">14,260km</span>
+                                <span class="stat-text">Range</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-num">Mach 0.925</span>
+                                <span class="stat-text">Speed</span>
+                            </div>
+                        </div>
+                        <ul class="fleet-features">
+                            <li><i class="fas fa-check-circle"></i> Dedicated master suite</li>
+                            <li><i class="fas fa-check-circle"></i> Pũr Air system</li>
+                            <li><i class="fas fa-check-circle"></i> Nuage ergonomic seats</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Main Footer Content -->
+            <div class="footer-content">
+                <!-- Company Info -->
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-plane"></i>
+                        <span class="footer-logo-text">SkyWings</span>
+                    </div>
+                    <p class="footer-description">
+                        Your trusted aviation partner for safe, comfortable, and reliable air travel. Experience the joy
+                        of flying with world-class service.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="booking.html">Flight Booking</a></li>
+                        <li><a href="index.html">Check-in Online</a></li>
+                        <li><a href="index.html">Flight Status</a></li>
+                        <li><a href="baggage.html">Baggage Info</a></li>
+                        <li><a href="travel-info.html">Travel Guidelines</a></li>
+                        <li><a href="contact.html">Special Assistance</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Cargo Services</a></li>
+                        <li><a href="#">Private Charters</a></li>
+                        <li><a href="#">Flight Training</a></li>
+                        <li><a href="#">Aircraft Leasing</a></li>
+                        <li><a href="lounge.html">Airport Lounges</a></li>
+                        <li><a href="insurance.html">Travel Insurance</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Stay Updated</h3>
+                    <p class="footer-description">
+                        Get exclusive flight deals and travel updates delivered to your inbox.
+                    </p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Enter your email" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn" aria-label="Subscribe">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <div class="app-download">
+                        <h4 class="download-title">Mobile App</h4>
+                        <div class="download-icons">
+                            <i class="fab fa-apple" aria-label="App Store"></i>
+                            <i class="fab fa-google-play" aria-label="Google Play"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="copyright">
+                        <p>&copy; 2024 SkyWings. All rights reserved.</p>
+                    </div>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Safety Information</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sign In Modal -->
+    <div class="modal" id="signInModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Sign In</h2>
+                <button class="modal-close" onclick="closeSignInModal()">&times;</button>
+            </div>
+            <form class="auth-form" id="signInForm">
+                <div class="form-group">
+                    <label for="signInEmail">Email</label>
+                    <input type="email" id="signInEmail" name="email" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signInPassword">Password</label>
+                    <input type="password" id="signInPassword" name="password" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="remember">
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn-auth">Sign In</button>
+                <div class="auth-switch">
+                    Don't have an account? <a href="#" onclick="switchToSignUp()">Sign Up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div class="modal" id="signUpModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Sign Up</h2>
+                <button class="modal-close" onclick="closeSignUpModal()">&times;</button>
+            </div>
+            <form class="auth-form" id="signUpForm">
+                <div class="form-group">
+                    <label for="signUpName">Full Name</label>
+                    <input type="text" id="signUpName" name="name" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signUpEmail">Email</label>
+                    <input type="email" id="signUpEmail" name="email" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signUpPassword">Password</label>
+                    <input type="password" id="signUpPassword" name="password" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signUpConfirmPassword">Confirm Password</label>
+                    <input type="password" id="signUpConfirmPassword" name="confirmPassword" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="terms" required>
+                        <span class="checkmark"></span>
+                        I agree to the Terms & Conditions
+                    </label>
+                </div>
+                <button type="submit" class="btn-auth">Sign Up</button>
+                <div class="auth-switch">
+                    Already have an account? <a href="#" onclick="switchToSignIn()">Sign In</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

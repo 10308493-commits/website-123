@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyWings - Your Aviation Portal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="nav-logo">
+                <a href="#" class="logo-link">
+                    <i class="fas fa-plane"></i>
+                    <span class="logo-text">SkyWings</span>
+                </a>
+            </div>
+
+
+            <!-- Navigation Menu -->
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            Flights <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="booking.html" class="dropdown-link">Book Flight</a></li>
+                            <li><a href="flight-status.html" class="dropdown-link">Flight Status</a></li>
+                            <li><a href="flight-schedule.html" class="dropdown-link">Flight Schedule</a></li>
+                            <li><a href="check-in.html" class="dropdown-link">Check-in</a></li>
+                            <li><a href="manage-booking.html" class="dropdown-link">Manage Booking</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            Services <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="cargo.html" class="dropdown-link">Cargo Services</a></li>
+                            <li><a href="charters.html" class="dropdown-link">Private Charters</a></li>
+                            <li><a href="training.html" class="dropdown-link">Flight Training</a></li>
+                            <li><a href="maintenance.html" class="dropdown-link">Aircraft Maintenance</a></li>
+                            <li><a href="airport-services.html" class="dropdown-link">Airport Services</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="fleet.html" class="nav-link">Fleet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="destinations.html" class="nav-link">Destinations</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            More <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="travel-info.html" class="dropdown-link">Travel Info</a></li>
+                            <li><a href="baggage.html" class="dropdown-link">Baggage</a></li>
+                            <li><a href="lounge.html" class="dropdown-link">Lounge Access</a></li>
+                            <li><a href="insurance.html" class="dropdown-link">Travel Insurance</a></li>
+                            <li><a href="contact.html" class="dropdown-link">Contact</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Right Side Icons -->
+            <div class="nav-actions">
+                <div class="notification-center" id="notificationCenter">
+                    <a href="javascript:void(0)" class="nav-action-link" id="notificationToggle"
+                        aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="action-badge" id="notifBadge">3</span>
+                    </a>
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="notif-header">
+                            <h3>Notifications</h3>
+                            <button class="mark-all-btn" onclick="markAllRead()">Mark all as read</button>
+                        </div>
+                        <div class="notif-list" id="notifList">
+                            <!-- JS will populate this -->
+                        </div>
+                        <div class="notif-footer">
+                            <a href="#">View all updates</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="nav-action-link" aria-label="My Trips">
+                    <i class="fas fa-suitcase"></i>
+                </a>
+                <button class="btn-sign-in" onclick="openSignInModal()">Sign In</button>
+                <button class="btn-sign-up" onclick="openSignUpModal()">Sign Up</button>
+                <div class="user-menu" id="userMenu">
+                    <a href="javascript:void(0)" class="nav-action-link" aria-label="User Account">
+                        <i class="fas fa-user-circle"></i>
+                    </a>
+                    <div class="user-dropdown">
+                        <a href="profile.html" class="user-dropdown-link">My Profile</a>
+                        <a href="bookings.html" class="user-dropdown-link">My Bookings</a>
+                        <a href="mileage.html" class="user-dropdown-link">Mileage Program</a>
+                        <a href="#" class="user-dropdown-link" onclick="signOut()">Sign Out</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero">
+            <!-- Video Background -->
+            <div class="video-background">
+                <video autoplay muted loop playsinline id="heroVideo">
+                    <source src="hero-video.mp4" type="video/mp4">
+                    <!-- Fallback for browsers that don't support video -->
+                    <div class="video-fallback"></div>
+                </video>
+                <!-- Video Overlay for better text readability -->
+                <div class="video-overlay"></div>
+            </div>
+
+            <!-- Hero Content -->
+            <div class="hero-content">
+                <h1>Welcome to SkyWings</h1>
+                <p>Your gateway to extraordinary aviation experiences. Fly with confidence, comfort, and style.</p>
+                <div class="hero-buttons">
+                    <button class="cta-button primary">Book Your Flight</button>
+                    <button class="cta-button secondary">Explore Destinations</button>
+                </div>
+            </div>
+
+            <!-- Video Controls -->
+            <div class="video-controls">
+                <button class="video-control-btn" id="playPauseBtn" aria-label="Play/Pause Video">
+                    <i class="fas fa-pause"></i>
+                </button>
+                <button class="video-control-btn" id="muteUnmuteBtn" aria-label="Mute/Unmute Video">
+                    <i class="fas fa-volume-mute"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services-section">
+            <div class="services-container">
+                <div class="section-header">
+                    <h2>Our Premium Services</h2>
+                    <p>Experience excellence in aviation with our comprehensive range of services</p>
+                </div>
+
+                <div class="services-grid">
+                    <!-- Flight Booking -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-plane-departure"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3>Flight Booking</h3>
+                            <p>Book domestic and international flights with ease. Get the best prices and flexible
+                                schedules.</p>
+                            <a href="#" class="service-link">Book Now →</a>
+                        </div>
+                    </div>
+
+                    <!-- Private Charters -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-jet-fighter"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3>Private Charters</h3>
+                            <p>Exclusive private jet services for business and leisure travel with personalized
+                                attention.</p>
+                            <a href="#" class="service-link">Learn More →</a>
+                        </div>
+                    </div>
+
+                    <!-- Cargo Services -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3>Cargo Services</h3>
+                            <p>Reliable freight and cargo transportation solutions for businesses worldwide.</p>
+                            <a href="#" class="service-link">Get Quote →</a>
+                        </div>
+                    </div>
+
+                    <!-- Flight Training -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3>Flight Training</h3>
+                            <p>Professional pilot training programs from beginner to advanced certifications.</p>
+                            <a href="#" class="service-link">Enroll Now →</a>
+                        </div>
+                    </div>
+
+                    <!-- Aircraft Maintenance -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3>Aircraft Maintenance</h3>
+                            <p>Expert maintenance and repair services for all aircraft types and models.</p>
+                            <a href="#" class="service-link">Schedule Service →</a>
+                        </div>
+                    </div>
+
+                    <!-- Airport Services -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3>Airport Services</h3>
+                            <p>Complete ground handling, lounge access, and VIP airport assistance.</p>
+                            <a href="#" class="service-link">Explore Services →</a>
+                        </div>
+                    </div>
+
+                    <!-- Travel Insurance -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3>Travel Insurance</h3>
+                            <p>Comprehensive travel insurance coverage for peace of mind during your journey.</p>
+                            <a href="#" class="service-link">Get Coverage →</a>
+                        </div>
+                    </div>
+
+                    <!-- Fleet Management -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div class="service-content">
+                            <h3>Fleet Management</h3>
+                            <p>Complete aircraft fleet management solutions for corporate and private operators.</p>
+                            <a href="#" class="service-link">Contact Us →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- News & Updates Section -->
+        <section class="news-section">
+            <div class="news-container">
+                <div class="section-header">
+                    <h2>Latest Aviation News</h2>
+                    <p>Stay informed with the latest updates, industry insights, and travel tips from SkyWings</p>
+                </div>
+
+                <!-- Featured News -->
+                <div class="featured-news">
+                    <article class="news-card featured">
+                        <div class="news-image-wrapper">
+                            <div class="news-image-placeholder">
+                                <i class="fas fa-newspaper"></i>
+                            </div>
+                            <span class="news-category featured-badge">Featured</span>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-date"><i class="far fa-calendar"></i> January 11, 2026</span>
+                                <span class="news-read-time"><i class="far fa-clock"></i> 5 min read</span>
+                            </div>
+                            <h3>SkyWings Launches Revolutionary Eco-Friendly Aircraft Fleet</h3>
+                            <p>In a groundbreaking move towards sustainable aviation, SkyWings announces the
+                                introduction of 25 next-generation aircraft powered by sustainable aviation fuel (SAF).
+                                This initiative marks a significant milestone in our commitment to reducing carbon
+                                emissions by 50% by 2030.</p>
+                            <a href="#" class="news-link">Read Full Story <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- News Grid -->
+                <div class="news-grid">
+                    <!-- News Article 1 -->
+                    <article class="news-card">
+                        <div class="news-image-wrapper">
+                            <div class="news-image-placeholder">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <span class="news-category awards">Awards</span>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-date"><i class="far fa-calendar"></i> January 8, 2026</span>
+                                <span class="news-read-time"><i class="far fa-clock"></i> 3 min read</span>
+                            </div>
+                            <h3>SkyWings Wins Best Airline Award for Third Consecutive Year</h3>
+                            <p>Recognized for exceptional customer service and innovation in the Aviation Excellence
+                                Awards. Our dedication to passenger comfort and safety continues to set industry
+                                standards.</p>
+                            <a href="#" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- News Article 2 -->
+                    <article class="news-card">
+                        <div class="news-image-wrapper">
+                            <div class="news-image-placeholder">
+                                <i class="fas fa-route"></i>
+                            </div>
+                            <span class="news-category routes">New Routes</span>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-date"><i class="far fa-calendar"></i> January 5, 2026</span>
+                                <span class="news-read-time"><i class="far fa-clock"></i> 4 min read</span>
+                            </div>
+                            <h3>Expanding Horizons: 15 New International Destinations</h3>
+                            <p>We're thrilled to announce new routes connecting major cities across Asia, Europe, and
+                                South America. Book your flights now and explore the world with SkyWings.</p>
+                            <a href="#" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- News Article 3 -->
+                    <article class="news-card">
+                        <div class="news-image-wrapper">
+                            <div class="news-image-placeholder">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <span class="news-category technology">Technology</span>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-date"><i class="far fa-calendar"></i> January 3, 2026</span>
+                                <span class="news-read-time"><i class="far fa-clock"></i> 2 min read</span>
+                            </div>
+                            <h3>New Mobile App Features: Enhanced Travel Experience</h3>
+                            <p>Our updated mobile app now includes real-time flight tracking, digital boarding passes,
+                                and AI-powered travel assistant. Download now for a seamless journey.</p>
+                            <a href="#" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- News Article 4 -->
+                    <article class="news-card">
+                        <div class="news-image-wrapper">
+                            <div class="news-image-placeholder">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <span class="news-category community">Community</span>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-date"><i class="far fa-calendar"></i> December 28, 2025</span>
+                                <span class="news-read-time"><i class="far fa-clock"></i> 3 min read</span>
+                            </div>
+                            <h3>SkyWings Foundation Supports Aviation Education</h3>
+                            <p>Our foundation launches scholarship program for aspiring pilots from underrepresented
+                                communities. Applications now open for the 2026 academic year.</p>
+                            <a href="#" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- News Article 5 -->
+                    <article class="news-card">
+                        <div class="news-image-wrapper">
+                            <div class="news-image-placeholder">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <span class="news-category tips">Travel Tips</span>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-date"><i class="far fa-calendar"></i> December 25, 2025</span>
+                                <span class="news-read-time"><i class="far fa-clock"></i> 6 min read</span>
+                            </div>
+                            <h3>Expert Travel Tips for the Holiday Season</h3>
+                            <p>Essential advice for smooth holiday travel: booking strategies, packing tips, navigating
+                                busy airports, and making the most of your journey during peak season.</p>
+                            <a href="#" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- News Article 6 -->
+                    <article class="news-card">
+                        <div class="news-image-wrapper">
+                            <div class="news-image-placeholder">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <span class="news-category safety">Safety</span>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-date"><i class="far fa-calendar"></i> December 20, 2025</span>
+                                <span class="news-read-time"><i class="far fa-clock"></i> 4 min read</span>
+                            </div>
+                            <h3>Enhanced Safety Protocols: Your Well-being is Our Priority</h3>
+                            <p>Learn about our comprehensive safety measures, advanced health screening, and contactless
+                                services designed to ensure your peace of mind while traveling.</p>
+                            <a href="#" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- View All News Button -->
+                <div class="news-cta">
+                    <button class="btn-view-all">
+                        View All News & Updates
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Main Footer Content -->
+            <div class="footer-content">
+                <!-- Company Info -->
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-plane"></i>
+                        <span class="footer-logo-text">SkyWings</span>
+                    </div>
+                    <p class="footer-description">
+                        Your trusted aviation partner for safe, comfortable, and reliable air travel. Experience the joy
+                        of flying with world-class service.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="booking.html">Flight Booking</a></li>
+                        <li><a href="check-in.html">Check-in Online</a></li>
+                        <li><a href="flight-status.html">Flight Status</a></li>
+                        <li><a href="baggage.html">Baggage Info</a></li>
+                        <li><a href="travel-info.html">Travel Guidelines</a></li>
+                        <li><a href="contact.html">Special Assistance</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Cargo Services</a></li>
+                        <li><a href="#">Private Charters</a></li>
+                        <li><a href="#">Flight Training</a></li>
+                        <li><a href="#">Aircraft Leasing</a></li>
+                        <li><a href="lounge.html">Airport Lounges</a></li>
+                        <li><a href="insurance.html">Travel Insurance</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Stay Updated</h3>
+                    <p class="footer-description">
+                        Get exclusive flight deals and travel updates delivered to your inbox.
+                    </p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Enter your email" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn" aria-label="Subscribe">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <div class="app-download">
+                        <h4 class="download-title">Mobile App</h4>
+                        <div class="download-icons">
+                            <i class="fab fa-apple" aria-label="App Store"></i>
+                            <i class="fab fa-google-play" aria-label="Google Play"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="copyright">
+                        <p>&copy; 2024 SkyWings. All rights reserved.</p>
+                    </div>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Safety Information</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sign In Modal -->
+    <div class="modal" id="signInModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Sign In</h2>
+                <button class="modal-close" onclick="closeSignInModal()">&times;</button>
+            </div>
+            <form class="auth-form" id="signInForm">
+                <div class="form-group">
+                    <label for="signInEmail">Email</label>
+                    <input type="email" id="signInEmail" name="email" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signInPassword">Password</label>
+                    <input type="password" id="signInPassword" name="password" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="remember">
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn-auth">Sign In</button>
+                <div class="auth-switch">
+                    Don't have an account? <a href="#" onclick="switchToSignUp()">Sign Up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div class="modal" id="signUpModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Sign Up</h2>
+                <button class="modal-close" onclick="closeSignUpModal()">&times;</button>
+            </div>
+            <form class="auth-form" id="signUpForm">
+                <div class="form-group">
+                    <label for="signUpName">Full Name</label>
+                    <input type="text" id="signUpName" name="name" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signUpEmail">Email</label>
+                    <input type="email" id="signUpEmail" name="email" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signUpPassword">Password</label>
+                    <input type="password" id="signUpPassword" name="password" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signUpConfirmPassword">Confirm Password</label>
+                    <input type="password" id="signUpConfirmPassword" name="confirmPassword" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="terms" required>
+                        <span class="checkmark"></span>
+                        I agree to the Terms & Conditions
+                    </label>
+                </div>
+                <button type="submit" class="btn-auth">Sign Up</button>
+                <div class="auth-switch">
+                    Already have an account? <a href="#" onclick="switchToSignIn()">Sign In</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

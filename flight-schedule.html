@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Schedule - SkyWings</title>
+    <meta name="description"
+        content="View SkyWings flight schedules and plan your next journey. Search for available flights by destination and date.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <i class="fas fa-plane"></i>
+                    <span class="logo-text">SkyWings</span>
+                </a>
+            </div>
+
+
+            <!-- Navigation Menu -->
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            Flights <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="booking.html" class="dropdown-link">Book Flight</a></li>
+                            <li><a href="flight-status.html" class="dropdown-link">Flight Status</a></li>
+                            <li><a href="flight-schedule.html" class="dropdown-link">Flight Schedule</a></li>
+                            <li><a href="check-in.html" class="dropdown-link">Check-in</a></li>
+                            <li><a href="manage-booking.html" class="dropdown-link">Manage Booking</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            Services <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="cargo.html" class="dropdown-link">Cargo Services</a></li>
+                            <li><a href="charters.html" class="dropdown-link">Private Charters</a></li>
+                            <li><a href="training.html" class="dropdown-link">Flight Training</a></li>
+                            <li><a href="maintenance.html" class="dropdown-link">Aircraft Maintenance</a></li>
+                            <li><a href="airport-services.html" class="dropdown-link">Airport Services</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="fleet.html" class="nav-link">Fleet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="destinations.html" class="nav-link">Destinations</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            More <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="travel-info.html" class="dropdown-link">Travel Info</a></li>
+                            <li><a href="baggage.html" class="dropdown-link">Baggage</a></li>
+                            <li><a href="lounge.html" class="dropdown-link">Lounge Access</a></li>
+                            <li><a href="insurance.html" class="dropdown-link">Travel Insurance</a></li>
+                            <li><a href="contact.html" class="dropdown-link">Contact</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Right Side Icons -->
+            <div class="nav-actions">
+                <div class="notification-center" id="notificationCenter">
+                    <a href="javascript:void(0)" class="nav-action-link" id="notificationToggle"
+                        aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="action-badge" id="notifBadge">3</span>
+                    </a>
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="notif-header">
+                            <h3>Notifications</h3>
+                            <button class="mark-all-btn" onclick="markAllRead()">Mark all as read</button>
+                        </div>
+                        <div class="notif-list" id="notifList">
+                            <!-- JS will populate this -->
+                        </div>
+                        <div class="notif-footer">
+                            <a href="#">View all updates</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="nav-action-link" aria-label="My Trips">
+                    <i class="fas fa-suitcase"></i>
+                </a>
+                <button class="btn-sign-in" onclick="openSignInModal()">Sign In</button>
+                <button class="btn-sign-up" onclick="openSignUpModal()">Sign Up</button>
+                <div class="user-menu" id="userMenu">
+                    <a href="javascript:void(0)" class="nav-action-link" aria-label="User Account">
+                        <i class="fas fa-user-circle"></i>
+                    </a>
+                    <div class="user-dropdown">
+                        <a href="profile.html" class="user-dropdown-link">My Profile</a>
+                        <a href="bookings.html" class="user-dropdown-link">My Bookings</a>
+                        <a href="mileage.html" class="user-dropdown-link">Mileage Program</a>
+                        <a href="#" class="user-dropdown-link" onclick="signOut()">Sign Out</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="flight-booking-section">
+            <div class="booking-background">
+                <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1600&q=80"
+                    alt="Airport terminal view" class="booking-bg-image">
+                <div class="booking-bg-overlay"></div>
+            </div>
+
+            <div class="booking-form-container" style="max-width: 1000px;">
+                <div class="booking-tabs">
+                    <a href="booking.html" class="booking-tab">Book Flight</a>
+                    <a href="flight-status.html" class="booking-tab">Flight Status</a>
+                    <a href="flight-schedule.html" class="booking-tab active">Flight Schedule</a>
+                </div>
+
+                <div class="booking-form-main">
+                    <h2 style="color: white; margin-bottom: 25px; font-size: 1.8rem;">Search Flight Schedule</h2>
+
+                    <!-- Trip Type Toggles -->
+                    <div class="form-row" style="margin-bottom: 20px;">
+                        <div class="form-group-inline">
+                            <label class="radio-inline">
+                                <input type="radio" name="tripType" value="one-way" checked aria-label="One-way trip">
+                                <span>One-way</span>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="tripType" value="round-trip" aria-label="Round trip">
+                                <span>Round-trip</span>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="tripType" value="multi-city" aria-label="Multi-city trip">
+                                <span>Multi-city</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <form id="flightScheduleForm">
+                        <div class="form-row-split">
+                            <div class="form-group-half" style="position: relative;">
+                                <label for="schedFrom">From</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-plane-departure"></i>
+                                    <input type="text" id="schedFrom" placeholder="Departure City or Airport"
+                                        title="Departure City or Airport" required>
+                                </div>
+                                <div id="schedFromSuggestions" class="search-results"></div>
+                            </div>
+                            <div class="form-group-half" style="position: relative;">
+                                <label for="schedTo">To</label>
+                                <div class="input-with-icon">
+                                    <i class="fas fa-plane-arrival"></i>
+                                    <input type="text" id="schedTo" placeholder="Arrival City or Airport"
+                                        title="Arrival City or Airport" required>
+                                </div>
+                                <div id="schedToSuggestions" class="search-results"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-row-split">
+                            <div class="form-group-half">
+                                <label for="schedDepDate">Departure Date</label>
+                                <input type="date" id="schedDepDate" title="Departure Date" required>
+                            </div>
+                            <div class="form-group-half" id="retDateGroup" style="opacity: 0.5; pointer-events: none;">
+                                <label for="schedRetDate">Return Date</label>
+                                <input type="date" id="schedRetDate" title="Return Date" placeholder="Return Date">
+                            </div>
+                        </div>
+
+                        <div class="form-row-split">
+                            <div class="form-group-half" style="position: relative;">
+                                <label for="passSummary">Passengers</label>
+                                <div class="input-with-icon" onclick="togglePassDropdown()">
+                                    <i class="fas fa-user-friends"></i>
+                                    <input type="text" id="passSummary" value="1 Adult" readonly
+                                        style="cursor: pointer;" title="Number of passengers" placeholder="1 Adult">
+                                </div>
+                                <!-- Passengers Dropdown -->
+                                <div id="passDropdown" class="passenger-dropdown"
+                                    style="display: none; position: absolute; top: 100%; left: 0; width: 100%; background: white; border-radius: 12px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); z-index: 100;">
+                                    <div class="pass-counter"
+                                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                        <div>
+                                            <span style="display: block; font-weight: 700;">Adults</span>
+                                            <small style="color: #64748b;">12+ years</small>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 15px;">
+                                            <button type="button" class="notif-btn" aria-label="Decrease adults"
+                                                onclick="updatePass('adult', -1)"><i class="fas fa-minus"></i></button>
+                                            <span id="adultCount">1</span>
+                                            <button type="button" class="notif-btn" aria-label="Increase adults"
+                                                onclick="updatePass('adult', 1)"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="pass-counter"
+                                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                        <div>
+                                            <span style="display: block; font-weight: 700;">Children</span>
+                                            <small style="color: #64748b;">2-11 years</small>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 15px;">
+                                            <button type="button" class="notif-btn" aria-label="Decrease children"
+                                                onclick="updatePass('child', -1)"><i class="fas fa-minus"></i></button>
+                                            <span id="childCount">0</span>
+                                            <button type="button" class="notif-btn" aria-label="Increase children"
+                                                onclick="updatePass('child', 1)"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="pass-counter"
+                                        style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div>
+                                            <span style="display: block; font-weight: 700;">Infants</span>
+                                            <small style="color: #64748b;">Under 2 years</small>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 15px;">
+                                            <button type="button" class="notif-btn" aria-label="Decrease infants"
+                                                onclick="updatePass('infant', -1)"><i class="fas fa-minus"></i></button>
+                                            <span id="infantCount">0</span>
+                                            <button type="button" class="notif-btn" aria-label="Increase infants"
+                                                onclick="updatePass('infant', 1)"><i class="fas fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn-search-main"
+                                        style="margin-top: 15px; width: 100%; border-radius: 8px; padding: 10px;"
+                                        onclick="togglePassDropdown()">Done</button>
+                                </div>
+                            </div>
+                            <div class="form-group-half">
+                                <label for="cabinClass">Cabin Class</label>
+                                <select id="cabinClass" title="Select cabin class"
+                                    style="width: 100%; padding: 12px; border-radius: 8px; border: none;">
+                                    <option value="economy">Economy</option>
+                                    <option value="premium-economy">Premium Economy</option>
+                                    <option value="business">Business</option>
+                                    <option value="first">First Class</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-search-main" style="margin-top: 10px;">SEARCH FLIGHTS</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Results Section -->
+        <section class="search-results-section" id="resultsSection" style="display: none;">
+            <!-- Filters Sidebar -->
+            <aside class="filters-sidebar">
+                <div class="filter-group">
+                    <h3 class="filter-title">Stops</h3>
+                    <label class="filter-option"><input type="checkbox" checked aria-label="Direct only"> Direct
+                        Only</label>
+                    <label class="filter-option"><input type="checkbox" aria-label="1 Stop"> 1 Stop</label>
+                    <label class="filter-option"><input type="checkbox" aria-label="2+ Stops"> 2+ Stops</label>
+                </div>
+
+                <div class="filter-group">
+                    <h3 class="filter-title">Departure Time</h3>
+                    <label class="filter-option"><input type="checkbox" aria-label="Morning flights"> Morning (06:00 -
+                        12:00)</label>
+                    <label class="filter-option"><input type="checkbox" aria-label="Afternoon flights"> Afternoon (12:00
+                        - 18:00)</label>
+                    <label class="filter-option"><input type="checkbox" aria-label="Night flights"> Night (18:00 -
+                        00:00)</label>
+                </div>
+
+                <div class="filter-group">
+                    <h3 class="filter-title">Airlines</h3>
+                    <label class="filter-option"><input type="checkbox" checked aria-label="SkyWings flights">
+                        SkyWings</label>
+                    <label class="filter-option"><input type="checkbox" aria-label="British Airways flights"> British
+                        Airways</label>
+                    <label class="filter-option"><input type="checkbox" aria-label="Emirates flights"> Emirates</label>
+                    <label class="filter-option"><input type="checkbox" aria-label="Qatar Airways flights"> Qatar
+                        Airways</label>
+                </div>
+
+                <div class="filter-group">
+                    <h3 class="filter-title">Price Range</h3>
+                    <input type="range" style="width: 100%;" min="200" max="5000" value="5000" title="Max price filter">
+                    <div
+                        style="display: flex; justify-content: space-between; margin-top: 10px; font-size: 0.8rem; color: #64748b;">
+                        <span>$200</span>
+                        <span>$5000</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Results Listing -->
+            <div class="results-listing">
+                <div class="results-header">
+                    <h2 id="resultsSummaryText">Showing available flights</h2>
+                    <select class="sort-select" id="sortOptions" title="Sort options">
+                        <option value="price-low">Price (Lowest)</option>
+                        <option value="duration">Duration (Shortest)</option>
+                        <option value="dep-time">Departure Time</option>
+                        <option value="arr-time">Arrival Time</option>
+                    </select>
+                </div>
+
+                <div id="flightResultsContainer">
+                    <!-- Results will be dynamically injected here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Current Status Highlights (Default view) -->
+        <section class="suggested-flights" id="defaultSchedules">
+            <div class="suggested-container">
+                <div class="section-header">
+                    <h2>Popular Schedules</h2>
+                    <p>Frequent connections across our global network</p>
+                </div>
+                <div
+                    style="overflow-x: auto; background: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); padding: 20px;">
+                    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid #f1f5f9;">
+                                <th style="padding: 15px; color: #1e3a8a;">Flight</th>
+                                <th style="padding: 15px; color: #1e3a8a;">Departure</th>
+                                <th style="padding: 15px; color: #1e3a8a;">Arrival</th>
+                                <th style="padding: 15px; color: #1e3a8a;">Frequency</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid #f1f5f9;">
+                                <td style="padding: 15px;">SW 101</td>
+                                <td style="padding: 15px;">08:00 AM</td>
+                                <td style="padding: 15px;">11:30 AM</td>
+                                <td style="padding: 15px;">Daily</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #f1f5f9;">
+                                <td style="padding: 15px;">SW 305</td>
+                                <td style="padding: 15px;">02:45 PM</td>
+                                <td style="padding: 15px;">05:15 PM</td>
+                                <td style="padding: 15px;">Mon, Wed, Fri</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Main Footer Content -->
+            <div class="footer-content">
+                <!-- Company Info -->
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-plane"></i>
+                        <span class="footer-logo-text">SkyWings</span>
+                    </div>
+                    <p class="footer-description">
+                        Your trusted aviation partner for safe, comfortable, and reliable air travel. Experience the joy
+                        of flying with world-class service.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="booking.html">Flight Booking</a></li>
+                        <li><a href="check-in.html">Check-in Online</a></li>
+                        <li><a href="flight-status.html">Flight Status</a></li>
+                        <li><a href="baggage.html">Baggage Info</a></li>
+                        <li><a href="travel-info.html">Travel Guidelines</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Cargo Services</a></li>
+                        <li><a href="#">Private Charters</a></li>
+                        <li><a href="#">Flight Training</a></li>
+                        <li><a href="lounge.html">Airport Lounges</a></li>
+                        <li><a href="insurance.html">Travel Insurance</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Stay Updated</h3>
+                    <p class="footer-description">Get exclusive flight deals and travel updates.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Enter your email" class="newsletter-input" required
+                            title="Newsletter Email">
+                        <button type="submit" class="newsletter-btn" aria-label="Subscribe"><i
+                                class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 SkyWings. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal" id="signInModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Sign In</h2>
+                <button class="modal-close" onclick="closeSignInModal()" aria-label="Close Modal">&times;</button>
+            </div>
+            <form class="auth-form" id="signInForm">
+                <div class="form-group"><label for="siEmail">Email</label><input type="email" id="siEmail" required
+                        placeholder="example@mail.com"></div>
+                <div class="form-group"><label for="siPass">Password</label><input type="password" id="siPass" required
+                        placeholder="******"></div>
+                <button type="submit" class="btn-auth">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Mock Airport Database
+        const airports = [
+            { code: 'ACC', name: 'Kotoka International', city: 'Accra' },
+            { code: 'LHR', name: 'Heathrow', city: 'London' },
+            { code: 'JFK', name: 'John F. Kennedy', city: 'New York' },
+            { code: 'DXB', name: 'Dubai International', city: 'Dubai' },
+            { code: 'HND', name: 'Haneda', city: 'Tokyo' },
+            { code: 'CDG', name: 'Charles de Gaulle', city: 'Paris' }
+        ];
+
+        // Mock Flights Database
+        const mockFlights = [
+            { id: 1, airline: 'SkyWings', logo: 'fa-plane', num: 'SW 204', from: 'LHR', to: 'ACC', dep: '10:30 AM', arr: '05:30 PM', dur: '7h 00m', price: 850, stops: 'Direct', seats: '12 available', class: 'Economy' },
+            { id: 2, airline: 'British Airways', logo: 'fa-plane', num: 'BA 081', from: 'LHR', to: 'ACC', dep: '11:15 AM', arr: '06:45 PM', dur: '7h 30m', price: 920, stops: 'Direct', seats: '5 available', class: 'Economy' },
+            { id: 3, airline: 'SkyWings', logo: 'fa-plane', num: 'SW 105', from: 'LHR', to: 'ACC', dep: '04:00 PM', arr: '11:00 PM', dur: '7h 00m', price: 780, stops: 'Direct', seats: 'Available', class: 'Economy' },
+            { id: 4, airline: 'Emirates', logo: 'fa-plane', num: 'EK 002', from: 'LHR', to: 'ACC', dep: '01:00 PM', arr: '02:00 AM', dur: '13h 00m', price: 1100, stops: '1 Stop (DXB)', seats: 'Limited', class: 'Business' }
+        ];
+
+        // Passenger Logic
+        let passengerCounts = { adult: 1, child: 0, infant: 0 };
+        function togglePassDropdown() {
+            const dp = document.getElementById('passDropdown');
+            dp.style.display = dp.style.display === 'none' ? 'block' : 'none';
+        }
+        function updatePass(type, diff) {
+            passengerCounts[type] = Math.max(type === 'adult' ? 1 : 0, passengerCounts[type] + diff);
+            document.getElementById(type + 'Count').innerText = passengerCounts[type];
+            let summary = `${passengerCounts.adult} Adult`;
+            if (passengerCounts.child > 0) summary += `, ${passengerCounts.child} Child`;
+            if (passengerCounts.infant > 0) summary += `, ${passengerCounts.infant} Infant`;
+            document.getElementById('passSummary').value = summary;
+        }
+
+        // Trip Type Change
+        document.querySelectorAll('input[name="tripType"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                const retGroup = document.getElementById('retDateGroup');
+                if (e.target.value === 'round-trip') {
+                    retGroup.style.opacity = '1';
+                    retGroup.style.pointerEvents = 'auto';
+                } else {
+                    retGroup.style.opacity = '0.5';
+                    retGroup.style.pointerEvents = 'none';
+                }
+            });
+        });
+
+        // Date Restriction
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('schedDepDate').min = today;
+        document.getElementById('schedRetDate').min = today;
+
+        // Auto-suggest logic
+        function setupSuggest(id, listId) {
+            const input = document.getElementById(id);
+            const list = document.getElementById(listId);
+            input.addEventListener('input', (e) => {
+                const val = e.target.value.toUpperCase();
+                if (val.length > 0) {
+                    const matches = airports.filter(a => a.name.toUpperCase().includes(val) || a.code.includes(val) || a.city.toUpperCase().includes(val));
+                    list.innerHTML = matches.map(a => `<div onclick="selectAirport('${id}', '${listId}', '${a.city} (${a.code})')">${a.city} - ${a.name} (${a.code})</div>`).join('');
+                    list.classList.add('active');
+                } else {
+                    list.classList.remove('active');
+                }
+            });
+        }
+        function selectAirport(id, listId, val) {
+            document.getElementById(id).value = val;
+            document.getElementById(listId).classList.remove('active');
+        }
+        setupSuggest('schedFrom', 'schedFromSuggestions');
+        setupSuggest('schedTo', 'schedToSuggestions');
+
+        // Form Submit
+        const form = document.getElementById('flightScheduleForm');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const from = document.getElementById('schedFrom').value;
+            const to = document.getElementById('schedTo').value;
+
+            const btn = form.querySelector('.btn-search-main');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> SEARCHING...';
+
+            setTimeout(() => {
+                btn.innerHTML = 'SEARCH FLIGHTS';
+                document.getElementById('defaultSchedules').style.display = 'none';
+                document.getElementById('resultsSection').style.display = 'grid';
+                document.getElementById('resultsSummaryText').innerText = `Flights from ${from} to ${to}`;
+                applyFiltersAndSort();
+                window.scrollTo({ top: document.getElementById('resultsSection').offsetTop - 100, behavior: 'smooth' });
+            }, 1000);
+        });
+
+        // Filter & Sort Logic
+        const sortSelect = document.getElementById('sortOptions');
+        const filterCheckboxes = document.querySelectorAll('.filters-sidebar input[type="checkbox"]');
+        const priceRange = document.querySelector('.filters-sidebar input[type="range"]');
+
+        function applyFiltersAndSort() {
+            let filtered = [...mockFlights];
+            const maxPrice = parseInt(priceRange.value);
+            filtered = filtered.filter(f => f.price <= maxPrice);
+
+            const sortBy = sortSelect ? sortSelect.value : 'price-low';
+            if (sortBy === 'price-low') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sortBy === 'duration') {
+                filtered.sort((a, b) => {
+                    const getMin = s => {
+                        const m = s.match(/(\d+)h\s+(\d+)m/);
+                        return m ? parseInt(m[1]) * 60 + parseInt(m[2]) : 0;
+                    };
+                    return getMin(a.dur) - getMin(b.dur);
+                });
+            } else if (sortBy === 'dep-time') {
+                filtered.sort((a, b) => a.dep.localeCompare(b.dep));
+            }
+
+            renderResults(filtered);
+        }
+
+        if (sortSelect) sortSelect.addEventListener('change', applyFiltersAndSort);
+        if (priceRange) priceRange.addEventListener('input', applyFiltersAndSort);
+        filterCheckboxes.forEach(cb => cb.addEventListener('change', applyFiltersAndSort));
+
+        function renderResults(flights) {
+            const container = document.getElementById('flightResultsContainer');
+            if (flights.length === 0) {
+                container.innerHTML = '<div style="text-align:center; padding: 40px; background: white; border-radius: 15px; margin-top:20px;">No flights found matching your filters.</div>';
+                return;
+            }
+            container.innerHTML = flights.map(f => `
+                <div class="flight-result-card">
+                    <div class="flight-main-row">
+                        <div class="airline-info">
+                            <div class="airline-logo"><i class="fas ${f.logo}"></i></div>
+                            <span class="airline-name">${f.airline}</span>
+                            <span class="flight-number">${f.num}</span>
+                        </div>
+                        <div class="journey-info">
+                            <div class="time-point">
+                                <span class="time-val">${f.dep}</span>
+                                <span class="airport-code">${f.from}</span>
+                            </div>
+                            <div class="trip-duration">
+                                <span class="duration-val">${f.dur}</span>
+                                <div class="duration-line"></div>
+                                <span class="stops-val">${f.stops}</span>
+                            </div>
+                            <div class="time-point">
+                                <span class="time-val">${f.arr}</span>
+                                <span class="airport-code">${f.to}</span>
+                            </div>
+                        </div>
+                        <div class="price-booking">
+                            <span class="availability-status ${f.seats.includes('available') ? 'status-available' : 'status-limited'}">
+                                <i class="fas fa-info-circle"></i> ${f.seats}
+                            </span>
+                            <span class="price-tag">$${f.price}</span>
+                            <button class="btn-search-main" style="width: 100%; padding: 10px; border-radius: 8px;" onclick="window.location.href='booking.html?flight=${f.num}'">SELECT</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+
+</html>

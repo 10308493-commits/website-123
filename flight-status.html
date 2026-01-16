@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Status - SkyWings</title>
+    <meta name="description"
+        content="Check the real-time status of your SkyWings flight. Track arrivals, departures, and any delays for domestic and international routes.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <i class="fas fa-plane"></i>
+                    <span class="logo-text">SkyWings</span>
+                </a>
+            </div>
+
+
+            <!-- Navigation Menu -->
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            Flights <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="booking.html" class="dropdown-link">Book Flight</a></li>
+                            <li><a href="flight-status.html" class="dropdown-link">Flight Status</a></li>
+                            <li><a href="flight-schedule.html" class="dropdown-link">Flight Schedule</a></li>
+                            <li><a href="check-in.html" class="dropdown-link">Check-in</a></li>
+                            <li><a href="manage-booking.html" class="dropdown-link">Manage Booking</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            Services <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="cargo.html" class="dropdown-link">Cargo Services</a></li>
+                            <li><a href="charters.html" class="dropdown-link">Private Charters</a></li>
+                            <li><a href="training.html" class="dropdown-link">Flight Training</a></li>
+                            <li><a href="maintenance.html" class="dropdown-link">Aircraft Maintenance</a></li>
+                            <li><a href="airport-services.html" class="dropdown-link">Airport Services</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="fleet.html" class="nav-link">Fleet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="destinations.html" class="nav-link">Destinations</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            More <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="travel-info.html" class="dropdown-link">Travel Info</a></li>
+                            <li><a href="baggage.html" class="dropdown-link">Baggage</a></li>
+                            <li><a href="lounge.html" class="dropdown-link">Lounge Access</a></li>
+                            <li><a href="insurance.html" class="dropdown-link">Travel Insurance</a></li>
+                            <li><a href="contact.html" class="dropdown-link">Contact</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Right Side Icons -->
+            <div class="nav-actions">
+                <div class="notification-center" id="notificationCenter">
+                    <a href="javascript:void(0)" class="nav-action-link" id="notificationToggle"
+                        aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="action-badge" id="notifBadge">3</span>
+                    </a>
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="notif-header">
+                            <h3>Notifications</h3>
+                            <button class="mark-all-btn" onclick="markAllRead()">Mark all as read</button>
+                        </div>
+                        <div class="notif-list" id="notifList">
+                            <!-- JS will populate this -->
+                        </div>
+                        <div class="notif-footer">
+                            <a href="#">View all updates</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="nav-action-link" aria-label="My Trips">
+                    <i class="fas fa-suitcase"></i>
+                </a>
+                <button class="btn-sign-in" onclick="openSignInModal()">Sign In</button>
+                <button class="btn-sign-up" onclick="openSignUpModal()">Sign Up</button>
+                <div class="user-menu" id="userMenu">
+                    <a href="javascript:void(0)" class="nav-action-link" aria-label="User Account">
+                        <i class="fas fa-user-circle"></i>
+                    </a>
+                    <div class="user-dropdown">
+                        <a href="profile.html" class="user-dropdown-link">My Profile</a>
+                        <a href="bookings.html" class="user-dropdown-link">My Bookings</a>
+                        <a href="mileage.html" class="user-dropdown-link">Mileage Program</a>
+                        <a href="#" class="user-dropdown-link" onclick="signOut()">Sign Out</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Flight Status Section -->
+        <section class="flight-booking-section">
+            <!-- Background Image -->
+            <div class="booking-background">
+                <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1600&q=80"
+                    alt="Airplane wing in the sky" class="booking-bg-image">
+                <div class="booking-bg-overlay"></div>
+            </div>
+
+            <!-- Status Form Container -->
+            <div class="booking-form-container">
+                <!-- Tab Navigation -->
+                <div class="booking-tabs">
+                    <a href="booking.html" class="booking-tab">Book Flight</a>
+                    <a href="flight-status.html" class="booking-tab active">Flight Status</a>
+                    <a href="manage-booking.html" class="booking-tab">Manage Booking</a>
+                </div>
+
+                <!-- Status Form -->
+                <div class="booking-form-main">
+                    <h2 style="color: white; margin-bottom: 20px; font-size: 1.8rem;">Check Flight Status</h2>
+                    <form id="flightStatusForm">
+                        <div class="form-row">
+                            <div class="form-group-inline">
+                                <label class="radio-inline">
+                                    <input type="radio" name="searchType" value="flight" checked>
+                                    <span>Search by Flight Number</span>
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="searchType" value="route">
+                                    <span>Search by Route</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Search by Flight Number -->
+                        <div id="flightNumGroup" class="form-row-split">
+                            <div class="form-group-half">
+                                <label>Flight Number</label>
+                                <input type="text" placeholder="e.g. SW 123" required>
+                                <div id="flightSuggestions" class="search-results"></div>
+                            </div>
+                            <div class="form-group-half">
+                                <label>Date</label>
+                                <input type="date" required>
+                            </div>
+                        </div>
+
+                        <!-- Search by Route -->
+                        <div id="routeGroup" class="form-row-split" style="display: none;">
+                            <div class="form-group-half">
+                                <label>From</label>
+                                <input type="text" id="routeFrom" placeholder="Departure City">
+                                <div id="fromSuggestions" class="search-results"></div>
+                            </div>
+                            <div class="form-group-half">
+                                <label>To</label>
+                                <input type="text" id="routeTo" placeholder="Arrival City">
+                                <div id="toSuggestions" class="search-results"></div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-search-main">CHECK STATUS</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flight Status Dashboard Results (Hidden by default) -->
+        <div id="flightStatusResult" style="display: none; padding-bottom: 60px;">
+            <!-- Content will be injected by JavaScript -->
+        </div>
+
+        <!-- Current Status Highlights -->
+        <section class="suggested-flights" id="liveUpdatesSection">
+            <div class="suggested-container">
+                <div class="section-header">
+                    <h2>Live Flight Updates</h2>
+                    <p>Real-time information for major SkyWings hubs</p>
+                </div>
+
+                <div class="flights-grid">
+                    <div class="flight-card">
+                        <div class="flight-info" style="padding: 25px;">
+                            <div class="flight-route">
+                                <h3>SW 204</h3>
+                                <span class="status-badge"
+                                    style="background: #10b981; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem;">On
+                                    Time</span>
+                            </div>
+                            <p style="margin: 15px 0; color: #64748b;">London (LHR) to New York (JFK)</p>
+                            <div class="flight-details">
+                                <div><strong>Dep:</strong> 10:30 AM</div>
+                                <div><strong>Arr:</strong> 01:45 PM</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flight-card">
+                        <div class="flight-info" style="padding: 25px;">
+                            <div class="flight-route">
+                                <h3>BA 081</h3>
+                                <span class="status-badge"
+                                    style="background: #ef4444; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem;">Delayed</span>
+                            </div>
+                            <p style="margin: 15px 0; color: #64748b;">London (LHR) to Accra (ACC)</p>
+                            <div class="flight-details">
+                                <div><strong>Dep:</strong> 11:15 AM (Delayed)</div>
+                                <div><strong>Arr:</strong> 06:15 PM</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Main Footer Content -->
+            <div class="footer-content">
+                <!-- Company Info -->
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-plane"></i>
+                        <span class="footer-logo-text">SkyWings</span>
+                    </div>
+                    <p class="footer-description">
+                        Your trusted aviation partner for safe, comfortable, and reliable air travel. Experience the joy
+                        of flying with world-class service.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="booking.html">Flight Booking</a></li>
+                        <li><a href="check-in.html">Check-in Online</a></li>
+                        <li><a href="flight-status.html">Flight Status</a></li>
+                        <li><a href="baggage.html">Baggage Info</a></li>
+                        <li><a href="travel-info.html">Travel Guidelines</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Cargo Services</a></li>
+                        <li><a href="#">Private Charters</a></li>
+                        <li><a href="#">Flight Training</a></li>
+                        <li><a href="lounge.html">Airport Lounges</a></li>
+                        <li><a href="insurance.html">Travel Insurance</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Stay Updated</h3>
+                    <p class="footer-description">Get exclusive flight deals and travel updates.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Enter your email" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2026 SkyWings. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sign In Modal -->
+    <div class="modal" id="signInModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Sign In</h2>
+                <button class="modal-close" onclick="closeSignInModal()">&times;</button>
+            </div>
+            <form class="auth-form" id="signInForm">
+                <div class="form-group">
+                    <label for="signInEmail">Email</label>
+                    <input type="email" id="signInEmail" name="email" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signInPassword">Password</label>
+                    <input type="password" id="signInPassword" name="password" required>
+                    <span class="form-error"></span>
+                </div>
+                <button type="submit" class="btn-auth">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div class="modal" id="signUpModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Sign Up</h2>
+                <button class="modal-close" onclick="closeSignUpModal()">&times;</button>
+            </div>
+            <form class="auth-form" id="signUpForm">
+                <div class="form-group">
+                    <label for="signUpName">Full Name</label>
+                    <input type="text" id="signUpName" name="name" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signUpEmail">Email</label>
+                    <input type="email" id="signUpEmail" name="email" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signUpPassword">Password</label>
+                    <input type="password" id="signUpPassword" name="password" required>
+                    <span class="form-error"></span>
+                </div>
+                <button type="submit" class="btn-auth">Sign Up</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Mock Flight Data
+        const flightDatabase = {
+            'BA081': {
+                number: 'BA 081',
+                status: 'delayed',
+                statusText: 'Delayed',
+                updated: 'Updated 1 min ago',
+                progress: 45,
+                departure: {
+                    city: 'London', airport: 'Heathrow (LHR)', terminal: 'Terminal 5', gate: 'B12', counter: 'C10-C15',
+                    scheduled: '10:30 AM', actual: '11:15 AM', weather: 'Cloudy, 14°C', localTime: '14:22 PM'
+                },
+                arrival: {
+                    city: 'Accra', airport: 'Kotoka (ACC)', terminal: 'Terminal 3', gate: 'D5', baggage: 'Carousel 2',
+                    scheduled: '05:30 PM', estimated: '06:15 PM', weather: 'Sunny, 29°C', localTime: '14:22 PM'
+                },
+                aircraft: { type: 'Boeing 787-9 Dreamliner', seats: '3-3-3 Config', altitude: '36,000 ft', speed: '510 mph' },
+                delay: { duration: '45 mins', reason: 'Late arrival of incoming aircraft due to weather' },
+                alerts: ['Gate changed from B10 to B12', 'Departure delayed by 45 mins']
+            },
+            'SW204': {
+                number: 'SW 204',
+                status: 'on-time',
+                statusText: 'On Time',
+                updated: 'Updated 2 mins ago',
+                progress: 75,
+                departure: {
+                    city: 'London', airport: 'Heathrow (LHR)', terminal: 'Terminal 5', gate: 'B12', counter: 'C10-C15',
+                    scheduled: '10:30 AM', actual: '10:35 AM', weather: 'Rainy, 12°C', localTime: '14:22 PM'
+                },
+                arrival: {
+                    city: 'New York', airport: 'John F. Kennedy (JFK)', terminal: 'Terminal 4', gate: 'A7', baggage: 'Carousel 4',
+                    scheduled: '01:45 PM', estimated: '01:50 PM', weather: 'Cloudy, 8°C', localTime: '09:22 AM'
+                },
+                aircraft: { type: 'Airbus A350-1000', seats: '1-2-1 Config', altitude: '38,000 ft', speed: '540 mph' }
+            }
+        };
+
+        const form = document.getElementById('flightStatusForm');
+        const result = document.getElementById('flightStatusResult');
+        const liveUpdates = document.getElementById('liveUpdatesSection');
+
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const inputs = form.querySelectorAll('input[type="text"]');
+                const val = inputs[0].value.replace(/\s+/g, '').toUpperCase();
+
+                const btn = form.querySelector('.btn-search-main');
+                const orig = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> SEARCHING...';
+
+                setTimeout(() => {
+                    btn.innerHTML = orig;
+                    const data = flightDatabase[val] || flightDatabase['SW204'];
+                    renderDashboard(data);
+                    result.style.display = 'block';
+                    liveUpdates.style.display = 'none';
+                    window.scrollTo({ top: result.offsetTop - 100, behavior: 'smooth' });
+                }, 800);
+            });
+        }
+
+        function renderDashboard(data) {
+            result.innerHTML = `
+                <div class="status-dashboard">
+                    <div class="dashboard-header">
+                        <div class="flight-main-info">
+                            <h1>Flight ${data.number}</h1>
+                            <span class="update-tag">${data.updated}</span>
+                        </div>
+                        <div class="status-badge-lg status-${data.status}">${data.statusText}</div>
+                    </div>
+
+                    <div class="timeline-container">
+                        <div class="flight-timeline">
+                            <div class="timeline-progress" style="width: ${data.progress}%"></div>
+                            <div class="timeline-step completed">
+                                <div class="step-dot"><i class="fas fa-check"></i></div>
+                                <span class="step-label">Scheduled</span>
+                            </div>
+                            <div class="timeline-step completed">
+                                <div class="step-dot"><i class="fas fa-plane-departure"></i></div>
+                                <span class="step-label">Departed</span>
+                            </div>
+                            <div class="timeline-step active">
+                                <div class="step-dot"><i class="fas fa-plane"></i></div>
+                                <span class="step-label">In Air</span>
+                            </div>
+                            <div class="timeline-step">
+                                <div class="step-dot"><i class="fas fa-plane-arrival"></i></div>
+                                <span class="step-label">Landed</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="details-grid">
+                        <div class="detail-card">
+                            <div class="card-header"><i class="fas fa-plane-departure"></i><h2>Departure</h2></div>
+                            <div class="info-row"><span class="info-label">Current local time</span><span class="info-value">${data.departure.localTime}</span></div>
+                            <div class="info-row"><span class="info-label">Terminal / Gate</span><span class="info-value">${data.departure.terminal} / ${data.departure.gate}</span></div>
+                            <div class="info-row"><span class="info-label">Check-in Counter</span><span class="info-value">${data.departure.counter}</span></div>
+                            <div class="info-row"><span class="info-label">Scheduled / Actual</span><span class="info-value">${data.departure.scheduled} / <span style="color:${data.status === 'delayed' ? '#ef4444' : '#10b981'}">${data.departure.actual}</span></span></div>
+                            <div class="weather-box"><i class="fas fa-cloud"></i><div><strong>Weather</strong><span>${data.departure.weather}</span></div></div>
+                        </div>
+                        <div class="detail-card">
+                            <div class="card-header"><i class="fas fa-plane-arrival"></i><h2>Arrival</h2></div>
+                            <div class="info-row"><span class="info-label">Airport time</span><span class="info-value">${data.arrival.localTime}</span></div>
+                            <div class="info-row"><span class="info-label">Terminal / Gate</span><span class="info-value">${data.arrival.terminal} / ${data.arrival.gate}</span></div>
+                            <div class="info-row"><span class="info-label">Baggage Claim</span><span class="info-value">${data.arrival.baggage}</span></div>
+                            <div class="info-row"><span class="info-label">Scheduled / Estimated</span><span class="info-value">${data.arrival.scheduled} / <span style="color:#6366f1">${data.arrival.estimated}</span></span></div>
+                            <div class="weather-box"><i class="fas fa-sun"></i><div><strong>Weather</strong><span>${data.arrival.weather}</span></div></div>
+                        </div>
+                    </div>
+
+                    <div class="extra-info-section">
+                        <div class="aircraft-details">
+                            <div class="card-header"><i class="fas fa-info-circle"></i><h2>Aircraft Info</h2></div>
+                            <div class="info-row"><span class="info-label">Type</span><span class="info-value">${data.aircraft.type}</span></div>
+                            <div class="info-row"><span class="info-label">Altitude / Speed</span><span class="info-value">${data.aircraft.altitude} / ${data.aircraft.speed}</span></div>
+                            <div style="margin-top:15px"><a href="#" style="color:#1e3a8a;text-decoration:none;font-weight:600"><i class="fas fa-map-marked-alt"></i> Terminal Map & Directions</a></div>
+                        </div>
+                        <div class="map-section">
+                             <div class="map-placeholder">
+                                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?w=800&q=80" alt="Map">
+                                <div class="live-indicator">● Live Tracking</div>
+                                <i class="fas fa-plane" style="position: absolute; top: 40%; left: 45%; color: #1e3a8a; font-size: 1.5rem; transform: rotate(45deg);"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    ${data.delay ? `<div class="alerts-section" style="background:#fee2e2;color:#991b1b"><strong>Delay:</strong> ${data.delay.duration} - ${data.delay.reason}</div>` : ''}
+                    ${data.alerts ? `<div class="alerts-section"><i class="fas fa-bell"></i><div><strong>Updates:</strong> ${data.alerts.join(' | ')}</div></div>` : ''}
+                </div>
+            `;
+        }
+
+        // Suggestions logic
+        const flightInput = document.querySelector('#flightNumGroup input');
+        const suggestions = document.getElementById('flightSuggestions');
+        if (flightInput) {
+            flightInput.addEventListener('input', (e) => {
+                const val = e.target.value.toUpperCase();
+                if (val.length > 1) {
+                    const matches = Object.keys(flightDatabase).filter(k => k.includes(val));
+                    suggestions.innerHTML = matches.map(m => `<div onclick="fillFlight('${m}')">${m} - SkyWings</div>`).join('');
+                    suggestions.classList.add('active');
+                } else {
+                    suggestions.classList.remove('active');
+                }
+            });
+        }
+        function fillFlight(val) {
+            flightInput.value = val;
+            suggestions.classList.remove('active');
+        }
+
+        document.querySelectorAll('input[name="searchType"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                document.getElementById('flightNumGroup').style.display = e.target.value === 'flight' ? 'flex' : 'none';
+                document.getElementById('routeGroup').style.display = e.target.value === 'route' ? 'flex' : 'none';
+            });
+        });
+    </script>
+</body>
+
+</html>

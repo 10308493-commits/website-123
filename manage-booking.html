@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Your Booking - SkyWings</title>
+    <meta name="description"
+        content="View, modify, or upgrade your SkyWings booking. Add special requests, choose seats, and manage your travel details in one place.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <i class="fas fa-plane"></i>
+                    <span class="logo-text">SkyWings</span>
+                </a>
+            </div>
+
+
+            <!-- Navigation Menu -->
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            Flights <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="booking.html" class="dropdown-link">Book Flight</a></li>
+                            <li><a href="flight-status.html" class="dropdown-link">Flight Status</a></li>
+                            <li><a href="flight-schedule.html" class="dropdown-link">Flight Schedule</a></li>
+                            <li><a href="check-in.html" class="dropdown-link">Check-in</a></li>
+                            <li><a href="manage-booking.html" class="dropdown-link">Manage Booking</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            Services <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="cargo.html" class="dropdown-link">Cargo Services</a></li>
+                            <li><a href="charters.html" class="dropdown-link">Private Charters</a></li>
+                            <li><a href="training.html" class="dropdown-link">Flight Training</a></li>
+                            <li><a href="maintenance.html" class="dropdown-link">Aircraft Maintenance</a></li>
+                            <li><a href="airport-services.html" class="dropdown-link">Airport Services</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="fleet.html" class="nav-link">Fleet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="destinations.html" class="nav-link">Destinations</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            More <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="travel-info.html" class="dropdown-link">Travel Info</a></li>
+                            <li><a href="baggage.html" class="dropdown-link">Baggage</a></li>
+                            <li><a href="lounge.html" class="dropdown-link">Lounge Access</a></li>
+                            <li><a href="insurance.html" class="dropdown-link">Travel Insurance</a></li>
+                            <li><a href="contact.html" class="dropdown-link">Contact</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Right Side Icons -->
+            <div class="nav-actions">
+                <div class="notification-center" id="notificationCenter">
+                    <a href="javascript:void(0)" class="nav-action-link" id="notificationToggle"
+                        aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="action-badge" id="notifBadge">3</span>
+                    </a>
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="notif-header">
+                            <h3>Notifications</h3>
+                            <button class="mark-all-btn" onclick="markAllRead()">Mark all as read</button>
+                        </div>
+                        <div class="notif-list" id="notifList">
+                            <!-- JS will populate this -->
+                        </div>
+                        <div class="notif-footer">
+                            <a href="#">View all updates</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="nav-action-link" aria-label="My Trips">
+                    <i class="fas fa-suitcase"></i>
+                </a>
+                <button class="btn-sign-in" onclick="openSignInModal()">Sign In</button>
+                <button class="btn-sign-up" onclick="openSignUpModal()">Sign Up</button>
+                <div class="user-menu" id="userMenu">
+                    <a href="javascript:void(0)" class="nav-action-link" aria-label="User Account">
+                        <i class="fas fa-user-circle"></i>
+                    </a>
+                    <div class="user-dropdown">
+                        <a href="profile.html" class="user-dropdown-link">My Profile</a>
+                        <a href="bookings.html" class="user-dropdown-link">My Bookings</a>
+                        <a href="mileage.html" class="user-dropdown-link">Mileage Program</a>
+                        <a href="#" class="user-dropdown-link" onclick="signOut()">Sign Out</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="flight-booking-section">
+            <div class="booking-background">
+                <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?w=1600&q=80"
+                    alt="Traveler using laptop at airport terminal" class="booking-bg-image">
+                <div class="booking-bg-overlay"></div>
+            </div>
+
+            <div class="booking-form-container" style="max-width: 600px;">
+                <div class="booking-tabs">
+                    <a href="booking.html" class="booking-tab">Book Flight</a>
+                    <a href="flight-status.html" class="booking-tab">Flight Status</a>
+                    <a href="manage-booking.html" class="booking-tab active">Manage Booking</a>
+                </div>
+
+                <div class="booking-form-main">
+                    <h2
+                        style="color: white; margin-bottom: 20px; font-size: 1.8rem; display: flex; align-items: center;">
+                        Retrieve Your Booking
+                        <span class="help-tooltip">
+                            <i class="fas fa-question-circle"></i>
+                            <span class="tooltip-text">
+                                Your booking reference is a 6-character code found in your confirmation email (e.g.,
+                                SKYW12).
+                            </span>
+                        </span>
+                    </h2>
+
+                    <div id="bookingError" class="error-message">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="errorText">Booking not found. Please check your details.</span>
+                    </div>
+
+                    <form id="manageBookingForm">
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label for="bookingRef" style="color: white; display: block; margin-bottom: 8px;">Booking
+                                Reference (PNR)</label>
+                            <input type="text" id="bookingRef" placeholder="e.g. SKYW12" required maxlength="6"
+                                pattern="[A-Za-z0-9]{6}" title="6-character alphanumeric code"
+                                style="width: 100%; padding: 12px; border-radius: 8px; border: none; font-weight: 600; text-transform: uppercase;">
+                            <small style="color: rgba(255,255,255,0.6); font-size: 0.75rem;">6-character alphanumeric
+                                code</small>
+                        </div>
+                        <div class="form-group" style="margin-bottom: 25px;">
+                            <label for="surname" style="color: white; display: block; margin-bottom: 8px;">Passenger's
+                                Last Name</label>
+                            <input type="text" id="surname" placeholder="As written on passport" required
+                                style="width: 100%; padding: 12px; border-radius: 8px; border: none;">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 15px;">
+                            <button type="submit" id="retrieveBtn" class="btn-search-main" style="width: 100%;">FIND MY
+                                BOOKING</button>
+                            <div style="text-align: center; color: white; position: relative; margin: 10px 0;">
+                                <span
+                                    style="background: transparent; padding: 0 10px; font-size: 0.8rem; color: rgba(255,255,255,0.5);">OR</span>
+                            </div>
+                            <button type="button" class="btn-auth"
+                                style="width: 100%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);"
+                                onclick="openSignInModal()">SIGN IN TO VIEW ALL BOOKINGS</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Results Container -->
+        <section class="booking-result-container" id="resultsContainer">
+            <div id="bookingList">
+                <!-- Bookings will be rendered here -->
+            </div>
+        </section>
+
+        <section class="promotions-section">
+            <div class="promotions-container">
+                <div class="section-header">
+                    <h2>What can you do here?</h2>
+                </div>
+                <div class="promotions-grid">
+                    <div class="promotion-card">
+                        <div class="promotion-content">
+                            <i class="fas fa-edit" style="font-size: 2rem; color: #1e3a8a; margin-bottom: 15px;"></i>
+                            <h3>Modify Flights</h3>
+                            <p>Change your flight dates or times easily. Flexible options available for most bookings.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="promotion-card">
+                        <div class="promotion-content">
+                            <i class="fas fa-utensils"
+                                style="font-size: 2rem; color: #1e3a8a; margin-bottom: 15px;"></i>
+                            <h3>Special Requests</h3>
+                            <p>Select your meals, request special assistance, or add extra baggage to your trip.</p>
+                        </div>
+                    </div>
+                    <div class="promotion-card">
+                        <div class="promotion-content">
+                            <i class="fas fa-arrow-up"
+                                style="font-size: 2rem; color: #1e3a8a; margin-bottom: 15px;"></i>
+                            <h3>Upgrade Seat</h3>
+                            <p>Treat yourself to a more comfortable journey with our premium cabin upgrades.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Main Footer Content -->
+            <div class="footer-content">
+                <!-- Company Info -->
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-plane"></i>
+                        <span class="footer-logo-text">SkyWings</span>
+                    </div>
+                    <p class="footer-description">
+                        Your trusted aviation partner for safe, comfortable, and reliable air travel. Experience the joy
+                        of flying with world-class service.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="booking.html">Flight Booking</a></li>
+                        <li><a href="check-in.html">Check-in Online</a></li>
+                        <li><a href="flight-status.html">Flight Status</a></li>
+                        <li><a href="baggage.html">Baggage Info</a></li>
+                        <li><a href="travel-info.html">Travel Guidelines</a></li>
+                        <li><a href="contact.html">Special Assistance</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Cargo Services</a></li>
+                        <li><a href="#">Private Charters</a></li>
+                        <li><a href="#">Flight Training</a></li>
+                        <li><a href="#">Aircraft Leasing</a></li>
+                        <li><a href="lounge.html">Airport Lounges</a></li>
+                        <li><a href="insurance.html">Travel Insurance</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Stay Updated</h3>
+                    <p class="footer-description">
+                        Get exclusive flight deals and travel updates delivered to your inbox.
+                    </p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Enter your email" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn" aria-label="Subscribe">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <div class="app-download">
+                        <h4 class="download-title">Mobile App</h4>
+                        <div class="download-icons">
+                            <i class="fab fa-apple" aria-label="App Store"></i>
+                            <i class="fab fa-google-play" aria-label="Google Play"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="copyright">
+                        <p>&copy; 2026 SkyWings. All rights reserved.</p>
+                    </div>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Safety Information</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sign In Modal -->
+    <div class="modal" id="signInModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Sign In</h2>
+                <button class="modal-close" onclick="closeSignInModal()">&times;</button>
+            </div>
+            <form class="auth-form" id="signInForm">
+                <div class="form-group">
+                    <label for="signInEmail">Email</label>
+                    <input type="email" id="signInEmail" name="email" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signInPassword">Password</label>
+                    <input type="password" id="signInPassword" name="password" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="remember">
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn-auth">Sign In</button>
+                <div class="auth-switch">
+                    Don't have an account? <a href="#" onclick="switchToSignUp()">Sign Up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div class="modal" id="signUpModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Sign Up</h2>
+                <button class="modal-close" onclick="closeSignUpModal()">&times;</button>
+            </div>
+            <form class="auth-form" id="signUpForm">
+                <div class="form-group">
+                    <label for="signUpName">Full Name</label>
+                    <input type="text" id="signUpName" name="name" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signUpEmail">Email</label>
+                    <input type="email" id="signUpEmail" name="email" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signUpPassword">Password</label>
+                    <input type="password" id="signUpPassword" name="password" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signUpConfirmPassword">Confirm Password</label>
+                    <input type="password" id="signUpConfirmPassword" name="confirmPassword" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="terms" required>
+                        <span class="checkmark"></span>
+                        I agree to the Terms & Conditions
+                    </label>
+                </div>
+                <button type="submit" class="btn-auth">Sign Up</button>
+                <div class="auth-switch">
+                    Already have an account? <a href="#" onclick="switchToSignIn()">Sign In</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Mock Booking Data
+        const mockBookings = {
+            "SKYW12": {
+                pnr: "SKYW12",
+                lastName: "DOE",
+                status: "confirmed",
+                flights: [
+                    {
+                        airline: "SkyWings",
+                        logo: "fas fa-plane",
+                        flightNum: "SW 204",
+                        fromCode: "LHR",
+                        fromCity: "London",
+                        toCode: "ACC",
+                        toCity: "Accra",
+                        date: "Jan 25, 2026",
+                        time: "10:30 AM",
+                        gate: "42",
+                        currentStep: 1 // 1: Confirmed, 2: Checked-in, 3: Boarding, 4: Flown
+                    },
+                    {
+                        airline: "SkyWings",
+                        logo: "fas fa-plane",
+                        flightNum: "SW 205",
+                        fromCode: "ACC",
+                        fromCity: "Accra",
+                        toCode: "LHR",
+                        toCity: "London",
+                        date: "Feb 05, 2026",
+                        time: "09:15 PM",
+                        gate: "B3",
+                        currentStep: 1
+                    }
+                ],
+                passengers: ["John Doe"]
+            }
+        };
+
+        const manageForm = document.getElementById('manageBookingForm');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const bookingList = document.getElementById('bookingList');
+        const errorDiv = document.getElementById('bookingError');
+        const errorText = document.getElementById('errorText');
+
+        if (manageForm) {
+            manageForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const pnr = document.getElementById('bookingRef').value.toUpperCase();
+                const surname = document.getElementById('surname').value.toUpperCase();
+                const btn = document.getElementById('retrieveBtn');
+
+                // Reset UI
+                errorDiv.style.display = 'none';
+                btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> RETRIEVING...';
+
+                fetch(`api/bookings.php?action=find&pnr=${pnr}&surname=${surname}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        btn.innerHTML = 'FIND MY BOOKING';
+                        if (data.id) {
+                            // Map backend data to frontend format
+                            const formattedBooking = {
+                                pnr: data.booking_pnr,
+                                passengerName: data.passenger_name,
+                                status: data.status.toLowerCase(),
+                                flights: [
+                                    {
+                                        airline: "SkyWings",
+                                        logo: "fas fa-plane",
+                                        flightNum: "SW " + Math.floor(100 + Math.random() * 900),
+                                        fromCode: data.from_city.substring(0, 3).toUpperCase(),
+                                        fromCity: data.from_city,
+                                        toCode: data.to_city.substring(0, 3).toUpperCase(),
+                                        toCity: data.to_city,
+                                        date: data.departure_date,
+                                        time: "TBA",
+                                        gate: "TBA",
+                                        currentStep: data.status === 'Checked-in' ? 2 : 1
+                                    }
+                                ]
+                            };
+                            renderBookings(formattedBooking);
+                            resultsContainer.style.display = 'block';
+                            window.scrollTo({ top: resultsContainer.offsetTop - 100, behavior: 'smooth' });
+                        } else {
+                            errorDiv.style.display = 'flex';
+                            errorText.innerText = data.error || "Booking not found.";
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Retrieval error:', err);
+                        btn.innerHTML = 'FIND MY BOOKING';
+                        errorDiv.style.display = 'flex';
+                        errorText.innerText = "Server error. Please try again later.";
+                    });
+            });
+        }
+
+        function renderBookings(data) {
+            let html = `
+                <div style="margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                    <h3 style="font-size: 1.5rem; color: #1e3a8a;">Your Booking: ${data.pnr}</h3>
+                    <div class="booking-status-badge status-${data.status}">${data.status}</div>
+                </div>
+            `;
+
+            data.flights.forEach((flight, idx) => {
+                html += `
+                    <div class="booking-summary-card">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+                            <div style="display: flex; gap: 15px; align-items: center;">
+                                <div style="width: 50px; height: 50px; background: #eff6ff; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #1e3a8a; font-size: 1.5rem;">
+                                    <i class="${flight.logo}"></i>
+                                </div>
+                                <div>
+                                    <span style="display: block; font-weight: 700; color: #1e3a8a;">${flight.airline} - ${flight.flightNum}</span>
+                                    <span style="font-size: 0.85rem; color: #64748b;">${flight.date} | ${flight.time}</span>
+                                </div>
+                            </div>
+                            <div style="text-align: right;">
+                                <span style="display: block; font-size: 0.75rem; color: #64748b; text-transform: uppercase;">Passengers</span>
+                                <span style="font-weight: 600;">${data.passengers.join(", ")}</span>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; align-items: center; gap: 30px; margin: 25px 0;">
+                            <div style="flex: 1;">
+                                <span style="display: block; font-size: 1.5rem; font-weight: 800; color: #1e3a8a;">${flight.fromCode}</span>
+                                <span style="color: #64748b;">${flight.fromCity}</span>
+                            </div>
+                            <div style="flex: 2; text-align: center; position: relative;">
+                                <div style="border-top: 2px dashed #e2e8f0; width: 100%; position: absolute; top: 50%; z-index: 0;"></div>
+                                <i class="fas fa-plane" style="background: white; padding: 0 15px; position: relative; z-index: 1; color: #1e3a8a;"></i>
+                            </div>
+                            <div style="flex: 1; text-align: right;">
+                                <span style="display: block; font-size: 1.5rem; font-weight: 800; color: #1e3a8a;">${flight.toCode}</span>
+                                <span style="color: #64748b;">${flight.toCity}</span>
+                            </div>
+                        </div>
+
+                        <!-- Progress Flow -->
+                        <div class="booking-progress">
+                            <div class="progress-node ${flight.currentStep >= 1 ? 'completed' : 'active'}"></div>
+                            <span class="progress-label">Confirmed</span>
+                            
+                            <div class="progress-node ${flight.currentStep >= 2 ? 'completed' : flight.currentStep === 1 ? 'active' : ''}"></div>
+                            <span class="progress-label">Checked-In</span>
+                            
+                            <div class="progress-node ${flight.currentStep >= 3 ? 'completed' : flight.currentStep === 2 ? 'active' : ''}"></div>
+                            <span class="progress-label">Boarding</span>
+                            
+                            <div class="progress-node ${flight.currentStep >= 4 ? 'completed' : flight.currentStep === 3 ? 'active' : ''}"></div>
+                            <span class="progress-label">Completed</span>
+                        </div>
+
+                        <div class="booking-action-grid">
+                            <button class="btn-booking-action primary" onclick="location.href='check-in.html'">
+                                <i class="fas fa-check-circle"></i> CHECK IN
+                            </button>
+                            <button class="btn-booking-action" onclick="location.href='flight-status.html'">
+                                <i class="fas fa-search-location"></i> FLIGHT STATUS
+                            </button>
+                            <button class="btn-booking-action" onclick="alert('Downloading Itinerary...')">
+                                <i class="fas fa-file-download"></i> ITINERARY
+                            </button>
+                            <button class="btn-booking-action" onclick="alert('Confirmation email resent!')">
+                                <i class="fas fa-envelope"></i> RESEND EMAIL
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            bookingList.innerHTML = html;
+        }
+    </script>
+</body>
+
+</html>

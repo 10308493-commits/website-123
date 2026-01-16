@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Flight - SkyWings</title>
+    <meta name="description"
+        content="Book your next flight with SkyWings. Search and compare flights, choose your seats, and enjoy exclusive deals on domestic and international routes.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <!-- Logo -->
+            <div class="nav-logo">
+                <a href="index.html" class="logo-link">
+                    <i class="fas fa-plane"></i>
+                    <span class="logo-text">SkyWings</span>
+                </a>
+            </div>
+
+
+            <!-- Navigation Menu -->
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            Flights <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="booking.html" class="dropdown-link">Book Flight</a></li>
+                            <li><a href="flight-status.html" class="dropdown-link">Flight Status</a></li>
+                            <li><a href="flight-schedule.html" class="dropdown-link">Flight Schedule</a></li>
+                            <li><a href="check-in.html" class="dropdown-link">Check-in</a></li>
+                            <li><a href="manage-booking.html" class="dropdown-link">Manage Booking</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            Services <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="cargo.html" class="dropdown-link">Cargo Services</a></li>
+                            <li><a href="charters.html" class="dropdown-link">Private Charters</a></li>
+                            <li><a href="training.html" class="dropdown-link">Flight Training</a></li>
+                            <li><a href="maintenance.html" class="dropdown-link">Aircraft Maintenance</a></li>
+                            <li><a href="airport-services.html" class="dropdown-link">Airport Services</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="fleet.html" class="nav-link">Fleet</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="destinations.html" class="nav-link">Destinations</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle">
+                            More <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="travel-info.html" class="dropdown-link">Travel Info</a></li>
+                            <li><a href="baggage.html" class="dropdown-link">Baggage</a></li>
+                            <li><a href="lounge.html" class="dropdown-link">Lounge Access</a></li>
+                            <li><a href="insurance.html" class="dropdown-link">Travel Insurance</a></li>
+                            <li><a href="contact.html" class="dropdown-link">Contact</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Right Side Icons -->
+            <div class="nav-actions">
+                <div class="notification-center" id="notificationCenter">
+                    <a href="javascript:void(0)" class="nav-action-link" id="notificationToggle"
+                        aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="action-badge" id="notifBadge">3</span>
+                    </a>
+                    <div class="notification-dropdown" id="notificationDropdown">
+                        <div class="notif-header">
+                            <h3>Notifications</h3>
+                            <button class="mark-all-btn" onclick="markAllRead()">Mark all as read</button>
+                        </div>
+                        <div class="notif-list" id="notifList">
+                            <!-- JS will populate this -->
+                        </div>
+                        <div class="notif-footer">
+                            <a href="#">View all updates</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="nav-action-link" aria-label="My Trips">
+                    <i class="fas fa-suitcase"></i>
+                </a>
+                <button class="btn-sign-in" onclick="openSignInModal()">Sign In</button>
+                <button class="btn-sign-up" onclick="openSignUpModal()">Sign Up</button>
+                <div class="user-menu" id="userMenu">
+                    <a href="javascript:void(0)" class="nav-action-link" aria-label="User Account">
+                        <i class="fas fa-user-circle"></i>
+                    </a>
+                    <div class="user-dropdown">
+                        <a href="profile.html" class="user-dropdown-link">My Profile</a>
+                        <a href="bookings.html" class="user-dropdown-link">My Bookings</a>
+                        <a href="mileage.html" class="user-dropdown-link">Mileage Program</a>
+                        <a href="#" class="user-dropdown-link" onclick="signOut()">Sign Out</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Flight Booking Section -->
+        <section class="flight-booking-section">
+            <!-- Background Image -->
+            <div class="booking-background">
+                <img src="https://tse3.mm.bing.net/th/id/OIP.k-3zyVbto_omHIUl0PA4iwHaE7?rs=1&pid=ImgDetMain&o=7&rm=3"
+                    alt="Airplane flying above clouds" class="booking-bg-image">
+                <div class="booking-bg-overlay"></div>
+            </div>
+
+            <!-- Booking Form Container -->
+            <div class="booking-form-container">
+                <!-- Tab Navigation -->
+                <div class="booking-tabs">
+                    <button class="booking-tab active">Book Flight</button>
+                    <button class="booking-tab">Flight Status</button>
+                    <button class="booking-tab">Manage Booking</button>
+                </div>
+
+                <!-- Booking Form -->
+                <form class="booking-form-main" id="flightSearchForm">
+                    <!-- Trip Type -->
+                    <div class="form-row">
+                        <div class="form-group-inline">
+                            <label class="radio-inline">
+                                <input type="radio" name="tripType" value="roundtrip" checked>
+                                <span>Round Trip</span>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="tripType" value="oneway">
+                                <span>One Way</span>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="tripType" value="multicity">
+                                <span>Multi City</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- From and To -->
+                    <div class="form-row-split">
+                        <div class="form-group-half">
+                            <label>From</label>
+                            <input type="text" placeholder="City or Airport" id="fromCity" required>
+                        </div>
+                        <div class="form-group-half">
+                            <label>To</label>
+                            <input type="text" placeholder="City or Airport" id="toCity" required>
+                        </div>
+                    </div>
+
+                    <!-- Dates -->
+                    <div class="form-row-split">
+                        <div class="form-group-half">
+                            <label>Departure Date</label>
+                            <input type="date" id="departureDate" required>
+                        </div>
+                        <div class="form-group-half" id="returnDateGroup">
+                            <label>Return Date</label>
+                            <input type="date" id="returnDateInput">
+                        </div>
+                    </div>
+
+                    <!-- Passengers and Class -->
+                    <div class="form-row-split">
+                        <div class="form-group-half">
+                            <label>Passengers</label>
+                            <select id="passengersSelect">
+                                <option value="1">1 Passenger</option>
+                                <option value="2">2 Passengers</option>
+                                <option value="3">3 Passengers</option>
+                                <option value="4">4 Passengers</option>
+                                <option value="5">5 Passengers</option>
+                                <option value="6">6+ Passengers</option>
+                            </select>
+                        </div>
+                        <div class="form-group-half">
+                            <label>Class</label>
+                            <select id="classSelect">
+                                <option value="economy">Economy</option>
+                                <option value="premium-economy">Premium Economy</option>
+                                <option value="business">Business Class</option>
+                                <option value="first">First Class</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Search Button -->
+                    <button type="submit" class="btn-search-main">
+                        BOOK NOW
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Suggested Flights Section -->
+        <section class="suggested-flights">
+            <div class="suggested-container">
+                <div class="section-header">
+                    <h2>Suggested Flights</h2>
+                    <p>Popular routes with the best deals</p>
+                </div>
+
+                <div class="flights-grid">
+                    <!-- Flight 1 -->
+                    <div class="flight-card">
+                        <div class="flight-image">
+                            <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80"
+                                alt="Flight to New York" class="flight-img">
+                            <div class="flight-badge">Popular</div>
+                        </div>
+                        <div class="flight-info">
+                            <div class="flight-route">
+                                <div class="route-city">
+                                    <i class="fas fa-plane-departure"></i>
+                                    <span>Los Angeles</span>
+                                </div>
+                                <div class="route-arrow">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                                <div class="route-city">
+                                    <i class="fas fa-plane-arrival"></i>
+                                    <span>New York</span>
+                                </div>
+                            </div>
+                            <div class="flight-details">
+                                <div class="flight-time">
+                                    <i class="far fa-clock"></i>
+                                    <span>5h 30m</span>
+                                </div>
+                                <div class="flight-class">
+                                    <i class="fas fa-chair"></i>
+                                    <span>Economy</span>
+                                </div>
+                            </div>
+                            <div class="flight-price-section">
+                                <div class="flight-price">
+                                    <span class="price-label">From</span>
+                                    <span class="price-amount">$299</span>
+                                </div>
+                                <button class="btn-book-flight">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flight 2 -->
+                    <div class="flight-card">
+                        <div class="flight-image">
+                            <img src="https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?w=800&q=80"
+                                alt="Flight to Paris" class="flight-img">
+                            <div class="flight-badge best-deal">Best Deal</div>
+                        </div>
+                        <div class="flight-info">
+                            <div class="flight-route">
+                                <div class="route-city">
+                                    <i class="fas fa-plane-departure"></i>
+                                    <span>New York</span>
+                                </div>
+                                <div class="route-arrow">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                                <div class="route-city">
+                                    <i class="fas fa-plane-arrival"></i>
+                                    <span>Paris</span>
+                                </div>
+                            </div>
+                            <div class="flight-details">
+                                <div class="flight-time">
+                                    <i class="far fa-clock"></i>
+                                    <span>7h 15m</span>
+                                </div>
+                                <div class="flight-class">
+                                    <i class="fas fa-chair"></i>
+                                    <span>Business</span>
+                                </div>
+                            </div>
+                            <div class="flight-price-section">
+                                <div class="flight-price">
+                                    <span class="price-label">From</span>
+                                    <span class="price-amount">$899</span>
+                                </div>
+                                <button class="btn-book-flight">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flight 3 -->
+                    <div class="flight-card">
+                        <div class="flight-image">
+                            <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80"
+                                alt="Flight to Tokyo" class="flight-img">
+                            <div class="flight-badge">Direct</div>
+                        </div>
+                        <div class="flight-info">
+                            <div class="flight-route">
+                                <div class="route-city">
+                                    <i class="fas fa-plane-departure"></i>
+                                    <span>San Francisco</span>
+                                </div>
+                                <div class="route-arrow">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                                <div class="route-city">
+                                    <i class="fas fa-plane-arrival"></i>
+                                    <span>Tokyo</span>
+                                </div>
+                            </div>
+                            <div class="flight-details">
+                                <div class="flight-time">
+                                    <i class="far fa-clock"></i>
+                                    <span>11h 45m</span>
+                                </div>
+                                <div class="flight-class">
+                                    <i class="fas fa-chair"></i>
+                                    <span>Economy</span>
+                                </div>
+                            </div>
+                            <div class="flight-price-section">
+                                <div class="flight-price">
+                                    <span class="price-label">From</span>
+                                    <span class="price-amount">$799</span>
+                                </div>
+                                <button class="btn-book-flight">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flight 4 -->
+                    <div class="flight-card">
+                        <div class="flight-image">
+                            <img src="https://images.unsplash.com/photo-1569629743817-70d8db6c323b?w=800&q=80"
+                                alt="Flight to Dubai" class="flight-img">
+                            <div class="flight-badge">Luxury</div>
+                        </div>
+                        <div class="flight-info">
+                            <div class="flight-route">
+                                <div class="route-city">
+                                    <i class="fas fa-plane-departure"></i>
+                                    <span>London</span>
+                                </div>
+                                <div class="route-arrow">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                                <div class="route-city">
+                                    <i class="fas fa-plane-arrival"></i>
+                                    <span>Dubai</span>
+                                </div>
+                            </div>
+                            <div class="flight-details">
+                                <div class="flight-time">
+                                    <i class="far fa-clock"></i>
+                                    <span>6h 50m</span>
+                                </div>
+                                <div class="flight-class">
+                                    <i class="fas fa-chair"></i>
+                                    <span>First Class</span>
+                                </div>
+                            </div>
+                            <div class="flight-price-section">
+                                <div class="flight-price">
+                                    <span class="price-label">From</span>
+                                    <span class="price-amount">$1,499</span>
+                                </div>
+                                <button class="btn-book-flight">Book Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Promotions / Offers Section -->
+        <section class="promotions-section">
+            <div class="promotions-container">
+                <div class="section-header">
+                    <h2>Exclusive Offers & Promotions</h2>
+                    <p>Save big on your next journey with our special deals and loyalty rewards</p>
+                </div>
+
+                <div class="promotions-grid">
+                    <!-- Seasonal Offer -->
+                    <div class="promotion-card">
+                        <div class="promotion-image">
+                            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
+                                alt="Summer travel promotion" class="promo-img">
+                            <div class="promo-badge">Limited Time</div>
+                        </div>
+                        <div class="promotion-content">
+                            <h3>Summer Sale - 30% Off</h3>
+                            <p>Book your summer vacation now and save up to 30% on selected domestic routes. Valid until
+                                August 31st.</p>
+                            <div class="promo-code">
+                                <span class="code-label">Use Code:</span>
+                                <span class="code-value">SUMMER30</span>
+                                <button class="copy-code-btn" onclick="copyPromoCode('SUMMER30')">Copy</button>
+                            </div>
+                            <button class="btn-apply-offer">Apply Offer</button>
+                        </div>
+                    </div>
+
+                    <!-- Loyalty Program -->
+                    <div class="promotion-card">
+                        <div class="promotion-image">
+                            <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80"
+                                alt="Loyalty program rewards" class="promo-img">
+                            <div class="promo-badge loyalty">Loyalty</div>
+                        </div>
+                        <div class="promotion-content">
+                            <h3>SkyWings Rewards</h3>
+                            <p>Join our loyalty program and earn miles on every flight. Get exclusive benefits, priority
+                                boarding, and free upgrades.</p>
+                            <div class="loyalty-tiers">
+                                <div class="tier">
+                                    <span class="tier-name">Silver</span>
+                                    <span class="tier-benefit">2x Miles</span>
+                                </div>
+                                <div class="tier">
+                                    <span class="tier-name">Gold</span>
+                                    <span class="tier-benefit">3x Miles</span>
+                                </div>
+                                <div class="tier">
+                                    <span class="tier-name">Platinum</span>
+                                    <span class="tier-benefit">5x Miles</span>
+                                </div>
+                            </div>
+                            <button class="btn-join-program">Join Now</button>
+                        </div>
+                    </div>
+
+                    <!-- Business Class Deal -->
+                    <div class="promotion-card">
+                        <div class="promotion-image">
+                            <img src="https://images.unsplash.com/photo-1542361347-5d8fe73bc8c8?w=800&q=80"
+                                alt="Business class upgrade" class="promo-img">
+                            <div class="promo-badge premium">Premium</div>
+                        </div>
+                        <div class="promotion-content">
+                            <h3>Business Class Upgrade</h3>
+                            <p>Upgrade to Business Class for just $199 extra. Enjoy premium seating, gourmet meals, and
+                                lounge access.</p>
+                            <div class="upgrade-features">
+                                <span class="feature-item"><i class="fas fa-check"></i> Priority Check-in</span>
+                                <span class="feature-item"><i class="fas fa-check"></i> Lounge Access</span>
+                                <span class="feature-item"><i class="fas fa-check"></i> Extra Baggage</span>
+                            </div>
+                            <button class="btn-upgrade">Upgrade Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Helpful Resources / Info Section -->
+        <section class="resources-section">
+            <div class="resources-container">
+                <div class="section-header">
+                    <h2>Helpful Resources & Information</h2>
+                    <p>Everything you need to know for a smooth travel experience</p>
+                </div>
+
+                <div class="resources-grid">
+                    <!-- Baggage Information -->
+                    <div class="resource-card">
+                        <div class="resource-image">
+                            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80"
+                                alt="Baggage allowance" class="resource-img">
+                        </div>
+                        <div class="resource-content">
+                            <h3>Baggage Allowance</h3>
+                            <p>Know your baggage limits and avoid extra fees. Different allowances apply by class and
+                                route.</p>
+                            <div class="baggage-info">
+                                <div class="baggage-class">
+                                    <span class="class-name">Economy</span>
+                                    <span class="baggage-weight">23kg</span>
+                                </div>
+                                <div class="baggage-class">
+                                    <span class="class-name">Business</span>
+                                    <span class="baggage-weight">32kg</span>
+                                </div>
+                                <div class="baggage-class">
+                                    <span class="class-name">First</span>
+                                    <span class="baggage-weight">40kg</span>
+                                </div>
+                            </div>
+                            <a href="#" class="resource-link">View Full Policy →</a>
+                        </div>
+                    </div>
+
+                    <!-- Travel Policies -->
+                    <div class="resource-card">
+                        <div class="resource-image">
+                            <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80"
+                                alt="Travel policies and safety" class="resource-img">
+                        </div>
+                        <div class="resource-content">
+                            <h3>Travel Policies & Safety</h3>
+                            <p>Stay informed about our travel policies, safety measures, and health requirements for
+                                your journey.</p>
+                            <div class="policy-highlights">
+                                <div class="policy-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>Enhanced Safety Measures</span>
+                                </div>
+                                <div class="policy-item">
+                                    <i class="fas fa-heart"></i>
+                                    <span>Health Guidelines</span>
+                                </div>
+                                <div class="policy-item">
+                                    <i class="fas fa-file-contract"></i>
+                                    <span>Terms & Conditions</span>
+                                </div>
+                            </div>
+                            <a href="#" class="resource-link">Read Policies →</a>
+                        </div>
+                    </div>
+
+                    <!-- Flight Tips & Guides -->
+                    <div class="resource-card">
+                        <div class="resource-image">
+                            <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=800&q=80"
+                                alt="Travel tips and guides" class="resource-img">
+                        </div>
+                        <div class="resource-content">
+                            <h3>Flight Tips & Guides</h3>
+                            <p>Expert advice to make your travel experience better. From packing tips to navigating
+                                airports.</p>
+                            <div class="tips-list">
+                                <div class="tip-item">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <span>Best Time to Book</span>
+                                </div>
+                                <div class="tip-item">
+                                    <i class="fas fa-suitcase"></i>
+                                    <span>Packing Essentials</span>
+                                </div>
+                                <div class="tip-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Airport Arrival Times</span>
+                                </div>
+                            </div>
+                            <a href="#" class="resource-link">View All Tips →</a>
+                        </div>
+                    </div>
+
+                    <!-- COVID Updates -->
+                    <div class="resource-card">
+                        <div class="resource-image">
+                            <img src="https://images.unsplash.com/photo-1584017918170-049fd55cc3c2?w=800&q=80"
+                                alt="COVID-19 travel updates" class="resource-img">
+                        </div>
+                        <div class="resource-content">
+                            <h3>COVID-19 Travel Updates</h3>
+                            <p>Stay updated with the latest travel restrictions, testing requirements, and vaccination
+                                policies.</p>
+                            <div class="covid-status">
+                                <div class="status-item">
+                                    <span class="status-label">Testing Required:</span>
+                                    <span class="status-value">Depends on destination</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">Mask Policy:</span>
+                                    <span class="status-value">Optional on flights</span>
+                                </div>
+                                <div class="status-item">
+                                    <span class="status-label">Last Updated:</span>
+                                    <span class="status-value">Dec 15, 2024</span>
+                                </div>
+                            </div>
+                            <a href="#" class="resource-link">Check Requirements →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <!-- Main Footer Content -->
+            <div class="footer-content">
+                <!-- Company Info -->
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-plane"></i>
+                        <span class="footer-logo-text">SkyWings</span>
+                    </div>
+                    <p class="footer-description">
+                        Your trusted aviation partner for safe, comfortable, and reliable air travel. Experience the joy
+                        of flying with world-class service.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-link" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="booking.html">Flight Booking</a></li>
+                        <li><a href="check-in.html">Check-in Online</a></li>
+                        <li><a href="flight-status.html">Flight Status</a></li>
+                        <li><a href="baggage.html">Baggage Info</a></li>
+                        <li><a href="travel-info.html">Travel Guidelines</a></li>
+                        <li><a href="contact.html">Special Assistance</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Cargo Services</a></li>
+                        <li><a href="#">Private Charters</a></li>
+                        <li><a href="#">Flight Training</a></li>
+                        <li><a href="#">Aircraft Leasing</a></li>
+                        <li><a href="lounge.html">Airport Lounges</a></li>
+                        <li><a href="insurance.html">Travel Insurance</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="footer-section">
+                    <h3 class="footer-title">Stay Updated</h3>
+                    <p class="footer-description">
+                        Get exclusive flight deals and travel updates delivered to your inbox.
+                    </p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Enter your email" class="newsletter-input" required>
+                        <button type="submit" class="newsletter-btn" aria-label="Subscribe">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <div class="app-download">
+                        <h4 class="download-title">Mobile App</h4>
+                        <div class="download-icons">
+                            <i class="fab fa-apple" aria-label="App Store"></i>
+                            <i class="fab fa-google-play" aria-label="Google Play"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="copyright">
+                        <p>&copy; 2026 SkyWings. All rights reserved.</p>
+                    </div>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Cookie Policy</a>
+                        <a href="#">Safety Information</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sign In Modal -->
+    <div class="modal" id="signInModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Sign In</h2>
+                <button class="modal-close" onclick="closeSignInModal()">&times;</button>
+            </div>
+            <form class="auth-form" id="signInForm">
+                <div class="form-group">
+                    <label for="signInEmail">Email</label>
+                    <input type="email" id="signInEmail" name="email" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signInPassword">Password</label>
+                    <input type="password" id="signInPassword" name="password" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="remember">
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn-auth">Sign In</button>
+                <div class="auth-switch">
+                    Don't have an account? <a href="#" onclick="switchToSignUp()">Sign Up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal -->
+    <div class="modal" id="signUpModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Sign Up</h2>
+                <button class="modal-close" onclick="closeSignUpModal()">&times;</button>
+            </div>
+            <form class="auth-form" id="signUpForm">
+                <div class="form-group">
+                    <label for="signUpName">Full Name</label>
+                    <input type="text" id="signUpName" name="name" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signUpEmail">Email</label>
+                    <input type="email" id="signUpEmail" name="email" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signUpPassword">Password</label>
+                    <input type="password" id="signUpPassword" name="password" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="signUpConfirmPassword">Confirm Password</label>
+                    <input type="password" id="signUpConfirmPassword" name="confirmPassword" required>
+                    <span class="form-error"></span>
+                </div>
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="terms" required>
+                        <span class="checkmark"></span>
+                        I agree to the Terms & Conditions
+                    </label>
+                </div>
+                <button type="submit" class="btn-auth">Sign Up</button>
+                <div class="auth-switch">
+                    Already have an account? <a href="#" onclick="switchToSignIn()">Sign In</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="booking.js"></script>
+</body>
+
+</html>
